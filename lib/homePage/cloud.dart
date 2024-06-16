@@ -17,7 +17,7 @@ class _cloudState extends State<cloud> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 30),
+      duration: const Duration(seconds: 30),
     )..repeat();
   }
 
@@ -37,7 +37,7 @@ class _cloudState extends State<cloud> with SingleTickerProviderStateMixin {
             return GradientIcon(
               icon: Icons.cloud,
               size: widget.sized,
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [Color(0xffD2CDFE), Color(0xffF8F7FF)],
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,

@@ -40,7 +40,7 @@ class _homePageState extends State<homePage> {
           children: [
             Positioned(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
                       Color(0xffFFE4C9),
@@ -53,7 +53,7 @@ class _homePageState extends State<homePage> {
                 ),
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 50,
               left: 20,
               width: 225,
@@ -101,7 +101,7 @@ class _homePageState extends State<homePage> {
               left: 20,
               right: 20,
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(20),
@@ -111,21 +111,21 @@ class _homePageState extends State<homePage> {
                   children: [
                     Container(
                       width: 150,
-                      padding: EdgeInsets.only(left: 16.0, right: 9.0),
+                      padding: const EdgeInsets.only(left: 16.0, right: 9.0),
                       decoration: BoxDecoration(
-                          color: Color(0xff323558),
+                          color: const Color(0xff323558),
                           borderRadius: BorderRadius.circular(15)),
                       child: DropdownButton<String>(
                         isExpanded: true,
-                        underline: SizedBox(),
-                        dropdownColor: Color(0xff323558),
+                        underline: const SizedBox(),
+                        dropdownColor: const Color(0xff323558),
                         iconEnabledColor: Colors.white,
                         value: selectedItem,
                         items: items
                             .map((item) => DropdownMenuItem<String>(
                                   value: item,
                                   child: Text('Card $item',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white, fontSize: 14)),
                                 ))
                             .toList(),
@@ -133,8 +133,8 @@ class _homePageState extends State<homePage> {
                             setState(() => selectedItem = item),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    GradientText(
+                    const SizedBox(height: 10),
+                    const GradientText(
                       text: 'Your available balance',
                       gradient: LinearGradient(
                         colors: [
@@ -150,9 +150,10 @@ class _homePageState extends State<homePage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(itemBalances[selectedItem]!,
-                        style: TextStyle(color: Colors.white, fontSize: 32)),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 32)),
                   ],
                 ),
               ),
@@ -190,10 +191,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/transfer.png'),
@@ -203,7 +204,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Transfer',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -226,10 +227,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/request_money.png'),
@@ -239,7 +240,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Request\n Money',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -262,10 +263,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/pay_bills.png'),
@@ -275,7 +276,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Pay Bills',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -298,10 +299,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/donations.png'),
@@ -311,7 +312,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Donations',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -340,10 +341,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/assurance.png'),
@@ -353,7 +354,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Assurance',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -376,10 +377,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/transaction_history.png'),
@@ -389,7 +390,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Transaction\n    History',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -412,10 +413,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage(
                                       'Icons/homePaage/vouchers.png'),
@@ -425,7 +426,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Vouchers',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -448,10 +449,10 @@ class _homePageState extends State<homePage> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xffF8F7FF),
+                                color: const Color(0xffF8F7FF),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/homePaage/more.png'),
                                   width: 30,
@@ -460,7 +461,7 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'More',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -476,10 +477,10 @@ class _homePageState extends State<homePage> {
           ],
         ),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Color(0xffF8F7FF),
+            backgroundColor: const Color(0xffF8F7FF),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             // onTap: _onItemTapped,
@@ -490,7 +491,7 @@ class _homePageState extends State<homePage> {
                   height: 24,
                   child: Image.asset(
                     'Icons/homePaage/navHome.png',
-                    color: Color(0xff6958D6),
+                    color: const Color(0xff6958D6),
                   ),
                 ),
                 label: '',
@@ -509,7 +510,7 @@ class _homePageState extends State<homePage> {
               BottomNavigationBarItem(
                 icon: Container(
                   decoration: BoxDecoration(
-                      color: Color(0xff6958D6),
+                      color: const Color(0xff6958D6),
                       borderRadius: BorderRadius.circular(18)),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -518,7 +519,7 @@ class _homePageState extends State<homePage> {
                       height: 24,
                       child: Image.asset(
                         'Icons/homePaage/navQR.png',
-                        color: Color(0xffF8F7FF),
+                        color: const Color(0xffF8F7FF),
                       ),
                     ),
                   ),

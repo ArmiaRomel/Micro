@@ -13,7 +13,7 @@ class _sunState extends State<sun> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: const Duration(seconds: 10),
     )..repeat();
   }
 
@@ -31,7 +31,7 @@ class _sunState extends State<sun> with SingleTickerProviderStateMixin {
         builder: (context, child) {
           return Transform.rotate(
             angle: _controller.value * 2.0 * 3.141592653589793,
-            child: Icon(
+            child: const Icon(
               Icons.wb_sunny,
               size: 50,
               color: Colors.orange,

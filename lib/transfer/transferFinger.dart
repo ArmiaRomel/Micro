@@ -11,7 +11,7 @@ class transferFinger extends StatefulWidget {
 class _transferFingerState extends State<transferFinger> {
   @override
   Widget build(BuildContext context) {
-    return PopScope(
+    return const PopScope(
       canPop: false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,

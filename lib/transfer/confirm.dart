@@ -26,7 +26,7 @@ class _confirmState extends State<confirm> {
       canPop: false,
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             top: 50,
@@ -43,9 +43,10 @@ class _confirmState extends State<confirm> {
                   enabled: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
+                    labelStyle:
+                        const TextStyle(fontSize: 14.0, color: Colors.black),
                     border: GradientOutlineInputBorder(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Color(0xff7762FF),
                           Color(0xffC589E4),
@@ -56,7 +57,7 @@ class _confirmState extends State<confirm> {
                     ),
                     labelText: 'Card number',
                   ),
-                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
               ),
               SizedBox(
@@ -67,9 +68,10 @@ class _confirmState extends State<confirm> {
                   enabled: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
+                    labelStyle:
+                        const TextStyle(fontSize: 14.0, color: Colors.black),
                     border: GradientOutlineInputBorder(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Color(0xff7762FF),
                           Color(0xffC589E4),
@@ -80,7 +82,7 @@ class _confirmState extends State<confirm> {
                     ),
                     labelText: "Receiver's wallet ID",
                   ),
-                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
               ),
               SizedBox(
@@ -91,9 +93,10 @@ class _confirmState extends State<confirm> {
                   enabled: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
+                    labelStyle:
+                        const TextStyle(fontSize: 14.0, color: Colors.black),
                     border: GradientOutlineInputBorder(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Color(0xff7762FF),
                           Color(0xffC589E4),
@@ -104,7 +107,7 @@ class _confirmState extends State<confirm> {
                     ),
                     labelText: 'Phone number',
                   ),
-                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
               ),
               SizedBox(
@@ -115,9 +118,10 @@ class _confirmState extends State<confirm> {
                   enabled: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
+                    labelStyle:
+                        const TextStyle(fontSize: 14.0, color: Colors.black),
                     border: GradientOutlineInputBorder(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Color(0xff7762FF),
                           Color(0xffC589E4),
@@ -128,7 +132,7 @@ class _confirmState extends State<confirm> {
                     ),
                     labelText: "Receiver's name",
                   ),
-                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
               ),
               SizedBox(
@@ -139,9 +143,10 @@ class _confirmState extends State<confirm> {
                   enabled: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(fontSize: 14.0, color: Colors.black),
+                    labelStyle:
+                        const TextStyle(fontSize: 14.0, color: Colors.black),
                     border: GradientOutlineInputBorder(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           Color(0xff7762FF),
                           Color(0xffC589E4),
@@ -152,7 +157,7 @@ class _confirmState extends State<confirm> {
                     ),
                     labelText: 'Amount',
                   ),
-                  style: TextStyle(fontSize: 22.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
               ),
               Row(
@@ -162,18 +167,19 @@ class _confirmState extends State<confirm> {
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        CupertinoPageRoute(builder: (context) => transfer()),
+                        CupertinoPageRoute(
+                            builder: (context) => const transfer()),
                         (Route<dynamic> route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(135, 56),
-                      backgroundColor: Color(0xff6958D6),
+                      minimumSize: const Size(135, 56),
+                      backgroundColor: const Color(0xff6958D6),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Cancel',
                       style: TextStyle(
                         color: Colors.white, // Set the font color to red
@@ -184,17 +190,17 @@ class _confirmState extends State<confirm> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        CupertinoPageRoute(builder: (context) => sent()),
+                        CupertinoPageRoute(builder: (context) => const sent()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(135, 56),
-                      backgroundColor: Color(0xff6958D6),
+                      minimumSize: const Size(135, 56),
+                      backgroundColor: const Color(0xff6958D6),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Send',
                       style: TextStyle(
                         color: Colors.white, // Set the font color to red

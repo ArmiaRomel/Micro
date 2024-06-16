@@ -39,7 +39,7 @@ class _transferState extends State<transfer> {
         backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 35,
             ),
             child: Column(
@@ -65,21 +65,21 @@ class _transferState extends State<transfer> {
                       ),
                       Container(
                         width: 150,
-                        padding: EdgeInsets.only(left: 16.0, right: 9.0),
+                        padding: const EdgeInsets.only(left: 16.0, right: 9.0),
                         decoration: BoxDecoration(
-                            color: Color(0xff323558),
+                            color: const Color(0xff323558),
                             borderRadius: BorderRadius.circular(15)),
                         child: DropdownButton<String>(
                           isExpanded: true,
-                          underline: SizedBox(),
-                          dropdownColor: Color(0xff323558),
+                          underline: const SizedBox(),
+                          dropdownColor: const Color(0xff323558),
                           iconEnabledColor: Colors.white,
                           value: selectedItem,
                           items: items
                               .map((item) => DropdownMenuItem<String>(
                                     value: item,
                                     child: Text('Card $item',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white, fontSize: 14)),
                                   ))
                               .toList(),
@@ -87,8 +87,8 @@ class _transferState extends State<transfer> {
                               setState(() => selectedItem = item!),
                         ),
                       ),
-                      SizedBox(height: 30),
-                      GradientText(
+                      const SizedBox(height: 30),
+                      const GradientText(
                         text: 'Amount',
                         gradient: LinearGradient(
                           colors: [
@@ -104,13 +104,14 @@ class _transferState extends State<transfer> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(itemBalances[selectedItem]!,
-                          style: TextStyle(color: Colors.white, fontSize: 32)),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 32)),
                     ],
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Column(
                   children: [
                     Form(
@@ -118,7 +119,7 @@ class _transferState extends State<transfer> {
                       child: Container(
                         width: 360,
                         height: 450,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(
@@ -134,16 +135,16 @@ class _transferState extends State<transfer> {
                               Container(
                                 width: 275,
                                 height: 60,
-                                padding:
-                                    EdgeInsets.only(left: 16.0, right: 9.0),
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, right: 9.0),
                                 decoration: BoxDecoration(
-                                  color: Color(0xff323558),
+                                  color: const Color(0xff323558),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: DropdownButton<String>(
                                   isExpanded: true,
-                                  underline: SizedBox(),
-                                  dropdownColor: Color(0xff323558),
+                                  underline: const SizedBox(),
+                                  dropdownColor: const Color(0xff323558),
                                   iconEnabledColor: Colors.white,
                                   value: selectedMethod,
                                   items: methods
@@ -152,7 +153,7 @@ class _transferState extends State<transfer> {
                                           value: method,
                                           child: Text(
                                             method,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 18),
                                           ),
@@ -168,7 +169,7 @@ class _transferState extends State<transfer> {
                                   },
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 15),
                               if (selectedMethod == 'Phone number')
                                 SizedBox(
                                   height: 150,
@@ -183,9 +184,9 @@ class _transferState extends State<transfer> {
                                           ElevatedButton(
                                             onPressed: () {},
                                             style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(130, 50),
+                                              minimumSize: const Size(130, 50),
                                               backgroundColor:
-                                                  Color(0xffF6F4FF),
+                                                  const Color(0xffF6F4FF),
                                               shape:
                                                   const RoundedRectangleBorder(
                                                       borderRadius:
@@ -197,7 +198,7 @@ class _transferState extends State<transfer> {
                                                   .all<EdgeInsets>(
                                                       EdgeInsets.zero),
                                             ),
-                                            child: Row(
+                                            child: const Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
@@ -221,9 +222,9 @@ class _transferState extends State<transfer> {
                                           ElevatedButton(
                                             onPressed: () {},
                                             style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(130, 50),
+                                              minimumSize: const Size(130, 50),
                                               backgroundColor:
-                                                  Color(0xffFFF9EC),
+                                                  const Color(0xffFFF9EC),
                                               shape:
                                                   const RoundedRectangleBorder(
                                                       borderRadius:
@@ -235,7 +236,7 @@ class _transferState extends State<transfer> {
                                                   .all<EdgeInsets>(
                                                       EdgeInsets.zero),
                                             ),
-                                            child: Row(
+                                            child: const Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
@@ -258,7 +259,7 @@ class _transferState extends State<transfer> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       SizedBox(
                                         height: 64,
                                         width: 310,
@@ -280,9 +281,9 @@ class _transferState extends State<transfer> {
                                           ],
                                           decoration: InputDecoration(
                                             labelStyle:
-                                                TextStyle(fontSize: 14.0),
+                                                const TextStyle(fontSize: 14.0),
                                             border: GradientOutlineInputBorder(
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xff7762FF),
                                                   Color(0xffC589E4),
@@ -294,7 +295,7 @@ class _transferState extends State<transfer> {
                                             ),
                                             labelText: 'Phone Number',
                                             errorStyle:
-                                                TextStyle(fontSize: 0.0),
+                                                const TextStyle(fontSize: 0.0),
                                             suffixIcon: _phone.length < 11
                                                 ? GestureDetector(
                                                     onTap: () {
@@ -304,11 +305,11 @@ class _transferState extends State<transfer> {
                                                         SnackBar(
                                                           content: Container(
                                                             padding:
-                                                                EdgeInsets.all(
-                                                                    16),
+                                                                const EdgeInsets
+                                                                    .all(16),
                                                             height: 90,
                                                             decoration:
-                                                                BoxDecoration(
+                                                                const BoxDecoration(
                                                               color: Color(
                                                                   0xFFC72C41),
                                                               borderRadius: BorderRadius
@@ -316,7 +317,7 @@ class _transferState extends State<transfer> {
                                                                       .circular(
                                                                           20)),
                                                             ),
-                                                            child: Text(
+                                                            child: const Text(
                                                               'Phone number should not be less than 11 numbers',
                                                               style: TextStyle(
                                                                 color: Colors
@@ -335,7 +336,8 @@ class _transferState extends State<transfer> {
                                                         ),
                                                       );
                                                     },
-                                                    child: Icon(Icons.info),
+                                                    child:
+                                                        const Icon(Icons.info),
                                                   )
                                                 : null,
                                           ),
@@ -348,7 +350,8 @@ class _transferState extends State<transfer> {
                                           },
                                           autovalidateMode: AutovalidateMode
                                               .onUserInteraction,
-                                          style: TextStyle(fontSize: 22.0),
+                                          style:
+                                              const TextStyle(fontSize: 22.0),
                                         ),
                                       ),
                                     ],
@@ -368,9 +371,9 @@ class _transferState extends State<transfer> {
                                           ElevatedButton(
                                             onPressed: () {},
                                             style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(130, 50),
+                                              minimumSize: const Size(130, 50),
                                               backgroundColor:
-                                                  Color(0xffF6F4FF),
+                                                  const Color(0xffF6F4FF),
                                               shape:
                                                   const RoundedRectangleBorder(
                                                       borderRadius:
@@ -382,7 +385,7 @@ class _transferState extends State<transfer> {
                                                   .all<EdgeInsets>(
                                                       EdgeInsets.zero),
                                             ),
-                                            child: Row(
+                                            child: const Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
@@ -405,7 +408,7 @@ class _transferState extends State<transfer> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                       SizedBox(
                                         height: 64,
                                         width: 310,
@@ -427,9 +430,9 @@ class _transferState extends State<transfer> {
                                           ],
                                           decoration: InputDecoration(
                                             labelStyle:
-                                                TextStyle(fontSize: 14.0),
+                                                const TextStyle(fontSize: 14.0),
                                             border: GradientOutlineInputBorder(
-                                              gradient: LinearGradient(
+                                              gradient: const LinearGradient(
                                                 colors: [
                                                   Color(0xff7762FF),
                                                   Color(0xffC589E4),
@@ -441,7 +444,7 @@ class _transferState extends State<transfer> {
                                             ),
                                             labelText: 'Bank account number',
                                             errorStyle:
-                                                TextStyle(fontSize: 0.0),
+                                                const TextStyle(fontSize: 0.0),
                                             suffixIcon: _bank_number.length < 16
                                                 ? GestureDetector(
                                                     onTap: () {
@@ -451,11 +454,11 @@ class _transferState extends State<transfer> {
                                                         SnackBar(
                                                           content: Container(
                                                             padding:
-                                                                EdgeInsets.all(
-                                                                    16),
+                                                                const EdgeInsets
+                                                                    .all(16),
                                                             height: 90,
                                                             decoration:
-                                                                BoxDecoration(
+                                                                const BoxDecoration(
                                                               color: Color(
                                                                   0xFFC72C41),
                                                               borderRadius: BorderRadius
@@ -463,7 +466,7 @@ class _transferState extends State<transfer> {
                                                                       .circular(
                                                                           20)),
                                                             ),
-                                                            child: Text(
+                                                            child: const Text(
                                                               'Bank account number should not be less than 16 numbers',
                                                               style: TextStyle(
                                                                 color: Colors
@@ -482,7 +485,8 @@ class _transferState extends State<transfer> {
                                                         ),
                                                       );
                                                     },
-                                                    child: Icon(Icons.info),
+                                                    child:
+                                                        const Icon(Icons.info),
                                                   )
                                                 : null,
                                           ),
@@ -495,13 +499,14 @@ class _transferState extends State<transfer> {
                                           },
                                           autovalidateMode: AutovalidateMode
                                               .onUserInteraction,
-                                          style: TextStyle(fontSize: 22.0),
+                                          style:
+                                              const TextStyle(fontSize: 22.0),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               SizedBox(
                                 height: 64,
                                 width: 310,
@@ -519,9 +524,9 @@ class _transferState extends State<transfer> {
                                     LengthLimitingTextInputFormatter(6),
                                   ],
                                   decoration: InputDecoration(
-                                    labelStyle: TextStyle(fontSize: 14.0),
+                                    labelStyle: const TextStyle(fontSize: 14.0),
                                     border: GradientOutlineInputBorder(
-                                      gradient: LinearGradient(
+                                      gradient: const LinearGradient(
                                         colors: [
                                           Color(0xff7762FF),
                                           Color(0xffC589E4),
@@ -531,7 +536,7 @@ class _transferState extends State<transfer> {
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     labelText: 'Amount',
-                                    errorStyle: TextStyle(fontSize: 0.0),
+                                    errorStyle: const TextStyle(fontSize: 0.0),
                                   ),
                                   validator: (name) {
                                     if (name!.length < 1) {
@@ -542,10 +547,10 @@ class _transferState extends State<transfer> {
                                   },
                                   autovalidateMode:
                                       AutovalidateMode.onUserInteraction,
-                                  style: TextStyle(fontSize: 22.0),
+                                  style: const TextStyle(fontSize: 22.0),
                                 ),
                               ),
-                              SizedBox(height: 22),
+                              const SizedBox(height: 22),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -556,19 +561,19 @@ class _transferState extends State<transfer> {
                                           context,
                                           CupertinoPageRoute(
                                               builder: (context) =>
-                                                  confirmPassword()),
+                                                  const confirmPassword()),
                                         );
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(180, 56),
-                                      backgroundColor: Color(0xff6958D6),
+                                      minimumSize: const Size(180, 56),
+                                      backgroundColor: const Color(0xff6958D6),
                                       elevation: 0,
                                       shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'Continue',
                                       style: TextStyle(
                                         color: Colors

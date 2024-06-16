@@ -9,7 +9,7 @@ class verifyFace extends StatefulWidget {
 class _verifyFaceState extends State<verifyFace> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.only(

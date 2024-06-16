@@ -17,7 +17,7 @@ class _loginFingerState extends State<loginFinger> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             top: 25,
@@ -26,8 +26,8 @@ class _loginFingerState extends State<loginFinger> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
-              Column(
+              const SizedBox(height: 50),
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -55,7 +55,7 @@ class _loginFingerState extends State<loginFinger> {
                   ),
                 ],
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -72,13 +72,13 @@ class _loginFingerState extends State<loginFinger> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Login()),
+                        MaterialPageRoute(builder: (context) => const Login()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Sign In With Email',
                       style: TextStyle(
                         color: Colors.black,

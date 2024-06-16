@@ -35,7 +35,7 @@ class _sentState extends State<sent> {
                 },
               ),
             ),
-            Positioned(
+            const Positioned(
               left: 20,
               top: 105,
               child: Image(
@@ -44,7 +44,7 @@ class _sentState extends State<sent> {
                 height: 115,
               ),
             ),
-            Positioned(
+            const Positioned(
               left: 20,
               top: 250,
               child: Column(
@@ -76,7 +76,7 @@ class _sentState extends State<sent> {
                 ],
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 375,
               left: 20,
               right: 20,
@@ -99,7 +99,7 @@ class _sentState extends State<sent> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15.0),
-                      border: GradientBoxBorder(
+                      border: const GradientBoxBorder(
                         gradient: LinearGradient(
                           colors: [
                             Color(0xff7762FF),
@@ -109,7 +109,7 @@ class _sentState extends State<sent> {
                         ),
                       ),
                     ),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Image(
@@ -120,8 +120,8 @@ class _sentState extends State<sent> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 15),
-                  GradientText(
+                  const SizedBox(height: 15),
+                  const GradientText(
                     text: "Armia Romel",
                     gradient: LinearGradient(
                       colors: [
@@ -137,8 +137,8 @@ class _sentState extends State<sent> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 15),
-                  Text(
+                  const SizedBox(height: 15),
+                  const Text(
                     '\$150',
                     style: TextStyle(
                       color: Colors.white,

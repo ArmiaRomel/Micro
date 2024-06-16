@@ -23,7 +23,7 @@ class _verifyPhoneState extends State<verifyPhone> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             bottom: 25,
@@ -41,26 +41,27 @@ class _verifyPhoneState extends State<verifyPhone> {
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        CupertinoPageRoute(builder: (context) => Signup()),
+                        CupertinoPageRoute(
+                            builder: (context) => const Signup()),
                         (Route<dynamic> route) => false,
                       );
                     },
                   ),
                 ],
               ),
-              Image(
+              const Image(
                 image: AssetImage('Icons/verify.png'),
                 width: 115,
                 height: 115,
               ),
-              Text(
+              const Text(
                 'Verify Code',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GradientText(
+              const GradientText(
                 text: 'Please enter authorization code sent on your Phone',
                 gradient: LinearGradient(
                   colors: [
@@ -76,7 +77,7 @@ class _verifyPhoneState extends State<verifyPhone> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(
@@ -111,7 +112,7 @@ class _verifyPhoneState extends State<verifyPhone> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -120,7 +121,7 @@ class _verifyPhoneState extends State<verifyPhone> {
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Resend Code',
                       style: TextStyle(
                         color: Colors.black,
@@ -130,7 +131,7 @@ class _verifyPhoneState extends State<verifyPhone> {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),

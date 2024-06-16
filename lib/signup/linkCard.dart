@@ -17,7 +17,7 @@ class _linkCardState extends State<linkCard> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             bottom: 25,
@@ -27,7 +27,7 @@ class _linkCardState extends State<linkCard> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Link your card',
                 style: TextStyle(
                   fontSize: 35,
@@ -37,14 +37,14 @@ class _linkCardState extends State<linkCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Bank account',
                     style: TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -55,7 +55,7 @@ class _linkCardState extends State<linkCard> {
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => cardInfo()),
+                                    builder: (context) => const cardInfo()),
                               );
                             },
                             style: ElevatedButton.styleFrom(
@@ -69,10 +69,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/1.png'),
                                   width: 40,
@@ -81,7 +81,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'NBE',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -104,10 +104,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/2.png'),
                                   width: 40,
@@ -116,7 +116,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Deutsche',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -139,10 +139,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/3.png'),
                                   width: 40,
@@ -151,7 +151,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'HSBS',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -174,10 +174,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/4.png'),
                                   width: 40,
@@ -186,7 +186,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Citibank',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -196,7 +196,7 @@ class _linkCardState extends State<linkCard> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -215,10 +215,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/5.png'),
                                   width: 40,
@@ -227,7 +227,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'PNC',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -250,10 +250,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/6.png'),
                                   width: 40,
@@ -262,7 +262,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Fidelity',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -285,10 +285,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/7.png'),
                                   width: 40,
@@ -297,7 +297,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Acbank',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -320,10 +320,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/8.png'),
                                   width: 40,
@@ -332,7 +332,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Union Bank',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -342,21 +342,21 @@ class _linkCardState extends State<linkCard> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size(110, 40),
-                          backgroundColor: Color(0xff05061B),
+                          minimumSize: const Size(110, 40),
+                          backgroundColor: const Color(0xff05061B),
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                         ),
-                        child: Text(
+                        child: const Text(
                           'See All',
                           style: TextStyle(
                             color: Colors.white,
@@ -371,14 +371,14 @@ class _linkCardState extends State<linkCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'International Card',
                     style: TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -397,10 +397,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/9.png'),
                                   width: 40,
@@ -409,7 +409,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Paypal',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -432,10 +432,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/10.png'),
                                   width: 40,
@@ -444,7 +444,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Mastercard',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -467,10 +467,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/11.png'),
                                   width: 40,
@@ -479,7 +479,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Visa',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -502,10 +502,10 @@ class _linkCardState extends State<linkCard> {
                               height: 63,
                               width: 63,
                               decoration: BoxDecoration(
-                                color: Color(0xFFF4F5F6),
+                                color: const Color(0xFFF4F5F6),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Image(
                                   image: AssetImage('Icons/banks/12.png'),
                                   width: 40,
@@ -514,7 +514,7 @@ class _linkCardState extends State<linkCard> {
                               ),
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Payoneer',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -524,21 +524,21 @@ class _linkCardState extends State<linkCard> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size(110, 40),
-                          backgroundColor: Color(0xff05061B),
+                          minimumSize: const Size(110, 40),
+                          backgroundColor: const Color(0xff05061B),
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                         ),
-                        child: Text(
+                        child: const Text(
                           'See All',
                           style: TextStyle(
                             color: Colors.white,

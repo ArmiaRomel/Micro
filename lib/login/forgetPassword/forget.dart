@@ -26,7 +26,7 @@ class _forgetState extends State<forget> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             top: 25,
@@ -46,19 +46,20 @@ class _forgetState extends State<forget> {
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,
-                          CupertinoPageRoute(builder: (context) => Login()),
+                          CupertinoPageRoute(
+                              builder: (context) => const Login()),
                           (Route<dynamic> route) => false,
                         );
                       },
                     ),
                   ],
                 ),
-                Image(
+                const Image(
                   image: AssetImage('Icons/forgetPassword.png'),
                   width: 115,
                   height: 115,
                 ),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -86,7 +87,7 @@ class _forgetState extends State<forget> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 SizedBox(
                   height: 64,
                   width: 310,
@@ -104,9 +105,9 @@ class _forgetState extends State<forget> {
                       LengthLimitingTextInputFormatter(11),
                     ],
                     decoration: InputDecoration(
-                      labelStyle: TextStyle(fontSize: 14.0),
+                      labelStyle: const TextStyle(fontSize: 14.0),
                       border: GradientOutlineInputBorder(
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           colors: [
                             Color(0xff7762FF),
                             Color(0xffC589E4),
@@ -116,21 +117,21 @@ class _forgetState extends State<forget> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       labelText: 'Phone Number',
-                      errorStyle: TextStyle(fontSize: 0.0),
+                      errorStyle: const TextStyle(fontSize: 0.0),
                       suffixIcon: _phone.length < 11
                           ? GestureDetector(
                               onTap: () {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Container(
-                                      padding: EdgeInsets.all(16),
+                                      padding: const EdgeInsets.all(16),
                                       height: 90,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xFFC72C41),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                       ),
-                                      child: Text(
+                                      child: const Text(
                                         'Phone number should not be less than 11 numbers',
                                         style: TextStyle(
                                           color: Colors.white,
@@ -144,7 +145,7 @@ class _forgetState extends State<forget> {
                                   ),
                                 );
                               },
-                              child: Icon(Icons.info),
+                              child: const Icon(Icons.info),
                             )
                           : null,
                     ),
@@ -156,10 +157,10 @@ class _forgetState extends State<forget> {
                       }
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    style: TextStyle(fontSize: 22.0),
+                    style: const TextStyle(fontSize: 22.0),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -174,14 +175,14 @@ class _forgetState extends State<forget> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(180, 56),
-                        backgroundColor: Color(0xff6958D6),
+                        minimumSize: const Size(180, 56),
+                        backgroundColor: const Color(0xff6958D6),
                         elevation: 0,
                         shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Next',
                         style: TextStyle(
                           color: Colors.white, // Set the font color to red
@@ -190,7 +191,7 @@ class _forgetState extends State<forget> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
               ],
             ),
           ),

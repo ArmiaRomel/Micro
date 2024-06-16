@@ -9,7 +9,7 @@ class verifyFinger extends StatefulWidget {
 class _verifyFingerState extends State<verifyFinger> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.only(

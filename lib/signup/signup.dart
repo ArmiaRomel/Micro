@@ -43,7 +43,7 @@ class _SignupState extends State<Signup> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 25,
               right: 25,
             ),
@@ -53,7 +53,7 @@ class _SignupState extends State<Signup> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -68,7 +68,7 @@ class _SignupState extends State<Signup> {
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Sign In',
                           style: TextStyle(
                             color: Colors.black,
@@ -78,14 +78,14 @@ class _SignupState extends State<Signup> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Image(
+                  const SizedBox(height: 16),
+                  const Image(
                     image: AssetImage('Icons/logo.png'),
                     width: 50,
                     height: 50,
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Welcome To Micro',
                     style: TextStyle(
                       fontSize: 30,
@@ -93,7 +93,7 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   // SizedBox(height: 16),
-                  GradientText(
+                  const GradientText(
                     text: 'Create an account to join Micro!',
                     gradient: LinearGradient(
                       colors: [
@@ -109,7 +109,7 @@ class _SignupState extends State<Signup> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -127,9 +127,9 @@ class _SignupState extends State<Signup> {
                               textAlign: TextAlign.center,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelStyle: TextStyle(fontSize: 14.0),
+                                labelStyle: const TextStyle(fontSize: 14.0),
                                 border: GradientOutlineInputBorder(
-                                  gradient: LinearGradient(
+                                  gradient: const LinearGradient(
                                     colors: [
                                       Color(0xff7762FF),
                                       Color(0xffC589E4),
@@ -139,7 +139,7 @@ class _SignupState extends State<Signup> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 labelText: 'First Name',
-                                errorStyle: TextStyle(fontSize: 0.0),
+                                errorStyle: const TextStyle(fontSize: 0.0),
                                 suffixIcon: _firstName.length < 3
                                     ? GestureDetector(
                                         onTap: () {
@@ -147,15 +147,16 @@ class _SignupState extends State<Signup> {
                                               .showSnackBar(
                                             SnackBar(
                                               content: Container(
-                                                padding: EdgeInsets.all(16),
+                                                padding:
+                                                    const EdgeInsets.all(16),
                                                 height: 90,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Color(0xFFC72C41),
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(20)),
                                                 ),
-                                                child: Text(
+                                                child: const Text(
                                                   'First name should not be less than 3 characters',
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -171,7 +172,7 @@ class _SignupState extends State<Signup> {
                                             ),
                                           );
                                         },
-                                        child: Icon(Icons.info),
+                                        child: const Icon(Icons.info),
                                       )
                                     : null,
                               ),
@@ -201,9 +202,9 @@ class _SignupState extends State<Signup> {
                           textAlign: TextAlign.center,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelStyle: TextStyle(fontSize: 14.0),
+                            labelStyle: const TextStyle(fontSize: 14.0),
                             border: GradientOutlineInputBorder(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xff7762FF),
                                   Color(0xffC589E4),
@@ -213,7 +214,7 @@ class _SignupState extends State<Signup> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             labelText: 'Last Name',
-                            errorStyle: TextStyle(fontSize: 0.0),
+                            errorStyle: const TextStyle(fontSize: 0.0),
                             suffixIcon: _secondName.length < 3
                                 ? GestureDetector(
                                     onTap: () {
@@ -221,14 +222,14 @@ class _SignupState extends State<Signup> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: EdgeInsets.all(16),
+                                            padding: const EdgeInsets.all(16),
                                             height: 90,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Last name should not be less than 3 characters',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -242,7 +243,7 @@ class _SignupState extends State<Signup> {
                                         ),
                                       );
                                     },
-                                    child: Icon(Icons.info),
+                                    child: const Icon(Icons.info),
                                   )
                                 : null,
                           ),
@@ -254,12 +255,12 @@ class _SignupState extends State<Signup> {
                             }
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          style: TextStyle(fontSize: 22.0),
+                          style: const TextStyle(fontSize: 22.0),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   SizedBox(
                     height: 64,
                     width: 310,
@@ -277,9 +278,9 @@ class _SignupState extends State<Signup> {
                         LengthLimitingTextInputFormatter(11),
                       ],
                       decoration: InputDecoration(
-                        labelStyle: TextStyle(fontSize: 14.0),
+                        labelStyle: const TextStyle(fontSize: 14.0),
                         border: GradientOutlineInputBorder(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xff7762FF),
                               Color(0xffC589E4),
@@ -289,21 +290,21 @@ class _SignupState extends State<Signup> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         labelText: 'Phone Number',
-                        errorStyle: TextStyle(fontSize: 0.0),
+                        errorStyle: const TextStyle(fontSize: 0.0),
                         suffixIcon: _phone.length < 11
                             ? GestureDetector(
                                 onTap: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Phone number should not be less than 11 numbers',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -317,7 +318,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               )
                             : null,
                       ),
@@ -329,10 +330,10 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: TextStyle(fontSize: 22.0),
+                      style: const TextStyle(fontSize: 22.0),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   SizedBox(
                     height: 64,
                     width: 310,
@@ -345,9 +346,9 @@ class _SignupState extends State<Signup> {
                       textAlign: TextAlign.center,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelStyle: TextStyle(fontSize: 14.0),
+                        labelStyle: const TextStyle(fontSize: 14.0),
                         border: GradientOutlineInputBorder(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xff7762FF),
                               Color(0xffC589E4),
@@ -357,21 +358,21 @@ class _SignupState extends State<Signup> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         labelText: 'Email',
-                        errorStyle: TextStyle(fontSize: 0.0),
+                        errorStyle: const TextStyle(fontSize: 0.0),
                         suffixIcon: _email.length < 1
                             ? GestureDetector(
                                 onTap: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Email is required',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -385,7 +386,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               )
                             : !emailRegex.hasMatch(_email)
                                 ? GestureDetector(
@@ -394,14 +395,14 @@ class _SignupState extends State<Signup> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: EdgeInsets.all(16),
+                                            padding: const EdgeInsets.all(16),
                                             height: 90,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Invalid email format',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -415,7 +416,7 @@ class _SignupState extends State<Signup> {
                                         ),
                                       );
                                     },
-                                    child: Icon(Icons.info),
+                                    child: const Icon(Icons.info),
                                   )
                                 : null,
                       ),
@@ -429,10 +430,10 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: TextStyle(fontSize: 22.0),
+                      style: const TextStyle(fontSize: 22.0),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   SizedBox(
                     height: 64,
                     width: 310,
@@ -445,7 +446,7 @@ class _SignupState extends State<Signup> {
                       textAlign: TextAlign.center,
                       obscureText: _isObsecured,
                       decoration: InputDecoration(
-                        errorStyle: TextStyle(fontSize: 0.0),
+                        errorStyle: const TextStyle(fontSize: 0.0),
                         suffixIcon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -455,14 +456,14 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password should not be less than 8 characters',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -476,7 +477,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               )
                             else if (!uppercaseRegex.hasMatch(_password))
                               GestureDetector(
@@ -484,14 +485,14 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one uppercase letter',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -505,7 +506,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               )
                             else if (!lowercaseRegex.hasMatch(_password))
                               GestureDetector(
@@ -513,14 +514,14 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one lowercase letter',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -534,7 +535,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               )
                             else if (!digitRegex.hasMatch(_password))
                               GestureDetector(
@@ -542,14 +543,14 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one digit',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -563,7 +564,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               )
                             else if (!specialCharRegex.hasMatch(_password))
                               GestureDetector(
@@ -571,14 +572,14 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: EdgeInsets.all(16),
+                                        padding: const EdgeInsets.all(16),
                                         height: 90,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one special character',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -592,7 +593,7 @@ class _SignupState extends State<Signup> {
                                     ),
                                   );
                                 },
-                                child: Icon(Icons.info),
+                                child: const Icon(Icons.info),
                               ),
                             IconButton(
                               padding:
@@ -608,9 +609,9 @@ class _SignupState extends State<Signup> {
                             ),
                           ],
                         ),
-                        labelStyle: TextStyle(fontSize: 14.0),
+                        labelStyle: const TextStyle(fontSize: 14.0),
                         border: GradientOutlineInputBorder(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xff7762FF),
                               Color(0xffC589E4),
@@ -633,10 +634,10 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: TextStyle(fontSize: 22.0),
+                      style: const TextStyle(fontSize: 22.0),
                     ),
                   ),
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -651,14 +652,14 @@ class _SignupState extends State<Signup> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          minimumSize: Size(180, 56),
-                          backgroundColor: Color(0xff6958D6),
+                          minimumSize: const Size(180, 56),
+                          backgroundColor: const Color(0xff6958D6),
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Create Account',
                           style: TextStyle(
                             color: Colors.white, // Set the font color to red
@@ -667,7 +668,7 @@ class _SignupState extends State<Signup> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

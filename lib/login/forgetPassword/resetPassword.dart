@@ -42,13 +42,13 @@ class _resetPasswordState extends State<resetPassword> {
       canPop: false,
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height,
             ),
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 25,
                 right: 25,
                 top: 25,
@@ -68,19 +68,20 @@ class _resetPasswordState extends State<resetPassword> {
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(
                               context,
-                              CupertinoPageRoute(builder: (context) => Login()),
+                              CupertinoPageRoute(
+                                  builder: (context) => const Login()),
                               (Route<dynamic> route) => false,
                             );
                           },
                         ),
                       ],
                     ),
-                    Image(
+                    const Image(
                       image: AssetImage('Icons/resetPassword.png'),
                       width: 115,
                       height: 115,
                     ),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -108,14 +109,14 @@ class _resetPasswordState extends State<resetPassword> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Column(
                       children: [
                         SizedBox(
                           height: 64,
                           width: 310,
                           child: TextFormField(
-                            key: ValueKey('resetPassword_password'),
+                            key: const ValueKey('resetPassword_password'),
                             controller: _passwordController,
                             onChanged: (value) {
                               setState(() {
@@ -125,7 +126,7 @@ class _resetPasswordState extends State<resetPassword> {
                             textAlign: TextAlign.center,
                             obscureText: _isObsecuredf,
                             decoration: InputDecoration(
-                              errorStyle: TextStyle(fontSize: 0.0),
+                              errorStyle: const TextStyle(fontSize: 0.0),
                               suffixIcon: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -136,14 +137,14 @@ class _resetPasswordState extends State<resetPassword> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Password should not be less than 8 characters',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -157,7 +158,7 @@ class _resetPasswordState extends State<resetPassword> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     )
                                   else if (!uppercaseRegex.hasMatch(_password))
                                     GestureDetector(
@@ -166,14 +167,14 @@ class _resetPasswordState extends State<resetPassword> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Password must contain at least one uppercase letter',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -187,7 +188,7 @@ class _resetPasswordState extends State<resetPassword> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     )
                                   else if (!lowercaseRegex.hasMatch(_password))
                                     GestureDetector(
@@ -196,14 +197,14 @@ class _resetPasswordState extends State<resetPassword> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Password must contain at least one lowercase letter',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -217,7 +218,7 @@ class _resetPasswordState extends State<resetPassword> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     )
                                   else if (!digitRegex.hasMatch(_password))
                                     GestureDetector(
@@ -226,14 +227,14 @@ class _resetPasswordState extends State<resetPassword> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Password must contain at least one digit',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -247,7 +248,7 @@ class _resetPasswordState extends State<resetPassword> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     )
                                   else if (!specialCharRegex
                                       .hasMatch(_password))
@@ -257,14 +258,14 @@ class _resetPasswordState extends State<resetPassword> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Password must contain at least one special character',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -278,7 +279,7 @@ class _resetPasswordState extends State<resetPassword> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     ),
                                   IconButton(
                                     padding: const EdgeInsetsDirectional.only(
@@ -294,9 +295,9 @@ class _resetPasswordState extends State<resetPassword> {
                                   ),
                                 ],
                               ),
-                              labelStyle: TextStyle(fontSize: 14.0),
+                              labelStyle: const TextStyle(fontSize: 14.0),
                               border: GradientOutlineInputBorder(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
                                     Color(0xff7762FF),
                                     Color(0xffC589E4),
@@ -320,15 +321,16 @@ class _resetPasswordState extends State<resetPassword> {
                             },
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            style: TextStyle(fontSize: 22.0),
+                            style: const TextStyle(fontSize: 22.0),
                           ),
                         ),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         SizedBox(
                           height: 64,
                           width: 310,
                           child: TextFormField(
-                            key: ValueKey('resetPassword_confirmPassword'),
+                            key:
+                                const ValueKey('resetPassword_confirmPassword'),
                             controller: _confirmPasswordController,
                             onChanged: (value) {
                               setState(() {
@@ -340,7 +342,7 @@ class _resetPasswordState extends State<resetPassword> {
                             textAlign: TextAlign.center,
                             obscureText: _isObsecureds,
                             decoration: InputDecoration(
-                              errorStyle: TextStyle(fontSize: 0.0),
+                              errorStyle: const TextStyle(fontSize: 0.0),
                               suffixIcon: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -352,14 +354,14 @@ class _resetPasswordState extends State<resetPassword> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Passwords do not match',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -373,7 +375,7 @@ class _resetPasswordState extends State<resetPassword> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     ),
                                   IconButton(
                                     padding: const EdgeInsetsDirectional.only(
@@ -389,9 +391,9 @@ class _resetPasswordState extends State<resetPassword> {
                                   ),
                                 ],
                               ),
-                              labelStyle: TextStyle(fontSize: 14.0),
+                              labelStyle: const TextStyle(fontSize: 14.0),
                               border: GradientOutlineInputBorder(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
                                     Color(0xff7762FF),
                                     Color(0xffC589E4),
@@ -412,12 +414,12 @@ class _resetPasswordState extends State<resetPassword> {
                             },
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            style: TextStyle(fontSize: 22.0),
+                            style: const TextStyle(fontSize: 22.0),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -427,20 +429,20 @@ class _resetPasswordState extends State<resetPassword> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => Login()),
+                                    builder: (context) => const Login()),
                                 (Route<dynamic> route) => false,
                               );
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(180, 56),
-                            backgroundColor: Color(0xff6958D6),
+                            minimumSize: const Size(180, 56),
+                            backgroundColor: const Color(0xff6958D6),
                             elevation: 0,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Sign in',
                             style: TextStyle(
                               color: Colors.white, // Set the font color to red
@@ -449,7 +451,7 @@ class _resetPasswordState extends State<resetPassword> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

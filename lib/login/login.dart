@@ -34,13 +34,13 @@ class _LoginState extends State<Login> {
       canPop: false,
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height,
             ),
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 25,
                 right: 25,
                 top: 50,
@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                           ),
-                          child: Text(
+                          child: const Text(
                             'Register',
                             style: TextStyle(
                               color: Colors.black,
@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                     // SizedBox(height: 15),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image(
@@ -127,9 +127,9 @@ class _LoginState extends State<Login> {
                             textAlign: TextAlign.center,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelStyle: TextStyle(fontSize: 14.0),
+                              labelStyle: const TextStyle(fontSize: 14.0),
                               border: GradientOutlineInputBorder(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
                                     Color(0xff7762FF),
                                     Color(0xffC589E4),
@@ -139,7 +139,7 @@ class _LoginState extends State<Login> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               labelText: 'Email',
-                              errorStyle: TextStyle(fontSize: 0.0),
+                              errorStyle: const TextStyle(fontSize: 0.0),
                               suffixIcon: _email.length < 1
                                   ? GestureDetector(
                                       onTap: () {
@@ -147,14 +147,14 @@ class _LoginState extends State<Login> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Email is required',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                                           ),
                                         );
                                       },
-                                      child: Icon(Icons.info),
+                                      child: const Icon(Icons.info),
                                     )
                                   : !emailRegex.hasMatch(_email)
                                       ? GestureDetector(
@@ -177,16 +177,18 @@ class _LoginState extends State<Login> {
                                                 .showSnackBar(
                                               SnackBar(
                                                 content: Container(
-                                                  padding: EdgeInsets.all(16),
+                                                  padding:
+                                                      const EdgeInsets.all(16),
                                                   height: 90,
-                                                  decoration: BoxDecoration(
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     color: Color(0xFFC72C41),
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 20)),
                                                   ),
-                                                  child: Text(
+                                                  child: const Text(
                                                     'Invalid email format',
                                                     style: TextStyle(
                                                       color: Colors.white,
@@ -202,7 +204,7 @@ class _LoginState extends State<Login> {
                                               ),
                                             );
                                           },
-                                          child: Icon(Icons.info),
+                                          child: const Icon(Icons.info),
                                         )
                                       : null,
                             ),
@@ -217,15 +219,15 @@ class _LoginState extends State<Login> {
                             },
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            style: TextStyle(fontSize: 22.0),
+                            style: const TextStyle(fontSize: 22.0),
                           ),
                         ),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         SizedBox(
                           height: 64,
                           width: 310,
                           child: TextFormField(
-                            key: ValueKey('login_password'),
+                            key: const ValueKey('login_password'),
                             onChanged: (value) {
                               setState(() {
                                 _password = value;
@@ -234,7 +236,7 @@ class _LoginState extends State<Login> {
                             textAlign: TextAlign.center,
                             obscureText: _isObsecured,
                             decoration: InputDecoration(
-                              errorStyle: TextStyle(fontSize: 0.0),
+                              errorStyle: const TextStyle(fontSize: 0.0),
                               suffixIcon: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -245,14 +247,14 @@ class _LoginState extends State<Login> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Container(
-                                              padding: EdgeInsets.all(16),
+                                              padding: const EdgeInsets.all(16),
                                               height: 90,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Color(0xFFC72C41),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
-                                              child: Text(
+                                              child: const Text(
                                                 'Invalid Password',
                                                 style: TextStyle(
                                                   color: Colors.white,
@@ -282,9 +284,9 @@ class _LoginState extends State<Login> {
                                   ),
                                 ],
                               ),
-                              labelStyle: TextStyle(fontSize: 14.0),
+                              labelStyle: const TextStyle(fontSize: 14.0),
                               border: GradientOutlineInputBorder(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
                                     Color(0xff7762FF),
                                     Color(0xffC589E4),
@@ -304,7 +306,7 @@ class _LoginState extends State<Login> {
                             },
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            style: TextStyle(fontSize: 22.0),
+                            style: const TextStyle(fontSize: 22.0),
                           ),
                         ),
                         Row(
@@ -315,13 +317,13 @@ class _LoginState extends State<Login> {
                                 Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                      builder: (context) => forget()),
+                                      builder: (context) => const forget()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Forgot password?',
                                 style: TextStyle(
                                   color: Colors.black,
@@ -348,14 +350,14 @@ class _LoginState extends State<Login> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(180, 56),
+                            minimumSize: const Size(180, 56),
                             backgroundColor: Color(0xff6958D6),
                             elevation: 0,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Sign In',
                             style: TextStyle(
                               color: Colors.white, // Set the font color to red
@@ -364,7 +366,7 @@ class _LoginState extends State<Login> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

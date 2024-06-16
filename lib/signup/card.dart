@@ -17,7 +17,7 @@ class _cardState extends State<card> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             bottom: 25,
@@ -27,19 +27,19 @@ class _cardState extends State<card> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image(
+              const Image(
                 image: AssetImage('Icons/card.png'),
                 width: 300,
                 height: 250,
               ),
-              Text(
+              const Text(
                 'Link your card',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 35),
+              const SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,13 +51,13 @@ class _cardState extends State<card> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(180, 56),
-                      backgroundColor: Color(0xff6958D6),
+                      minimumSize: const Size(180, 56),
+                      backgroundColor: const Color(0xff6958D6),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Continue',
                       style: TextStyle(
                         color: Colors.white, // Set the font color to red

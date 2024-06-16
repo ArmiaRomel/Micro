@@ -24,7 +24,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 25,
             right: 25,
             bottom: 25,
@@ -42,26 +42,27 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        CupertinoPageRoute(builder: (context) => forget()),
+                        CupertinoPageRoute(
+                            builder: (context) => const forget()),
                         (Route<dynamic> route) => false,
                       );
                     },
                   ),
                 ],
               ),
-              Image(
+              const Image(
                 image: AssetImage('Icons/verify.png'),
                 width: 115,
                 height: 115,
               ),
-              Text(
+              const Text(
                 'Verify Code',
                 style: TextStyle(
                   fontSize: 35,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GradientText(
+              const GradientText(
                 text: 'Please enter authorization code sent on your Phone',
                 gradient: LinearGradient(
                   colors: [
@@ -77,7 +78,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(
@@ -104,7 +105,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) => resetPassword()),
+                                  builder: (context) => const resetPassword()),
                             );
                           }
                         }
@@ -113,7 +114,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -124,7 +125,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Resend Code',
                           style: TextStyle(
                             color: Colors.black,
@@ -137,7 +138,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Reset password with Email',
                           style: TextStyle(
                             color: Colors.black,
@@ -149,7 +150,7 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),

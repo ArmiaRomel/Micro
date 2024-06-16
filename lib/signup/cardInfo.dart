@@ -28,11 +28,11 @@ class _cardInfoState extends State<cardInfo> {
         resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(top: 25),
+            padding: const EdgeInsets.only(top: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 25),
                   child: Text(
                     'Link your card',
@@ -99,11 +99,11 @@ class _cardInfoState extends State<cardInfo> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         inputConfiguration: InputConfiguration(
                           cardNumberDecoration: InputDecoration(
-                            labelStyle: TextStyle(fontSize: 12.5),
+                            labelStyle: const TextStyle(fontSize: 12.5),
                             labelText: 'Number',
                             hintText: 'XXXX XXXX XXXX XXXX',
                             border: GradientOutlineInputBorder(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xff7762FF),
                                   Color(0xffC589E4),
@@ -112,7 +112,7 @@ class _cardInfoState extends State<cardInfo> {
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            errorStyle: TextStyle(fontSize: 0.0),
+                            errorStyle: const TextStyle(fontSize: 0.0),
                             suffixIcon: _cardNumber.length < 16
                                 ? GestureDetector(
                                     onTap: () {
@@ -120,14 +120,14 @@ class _cardInfoState extends State<cardInfo> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: EdgeInsets.all(16),
+                                            padding: const EdgeInsets.all(16),
                                             height: 90,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Please input valid number',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -141,16 +141,16 @@ class _cardInfoState extends State<cardInfo> {
                                         ),
                                       );
                                     },
-                                    child: Icon(Icons.info),
+                                    child: const Icon(Icons.info),
                                   )
                                 : null,
                           ),
                           expiryDateDecoration: InputDecoration(
-                            labelStyle: TextStyle(fontSize: 12.5),
+                            labelStyle: const TextStyle(fontSize: 12.5),
                             labelText: 'Expired Date',
                             hintText: 'xx/xx',
                             border: GradientOutlineInputBorder(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xff7762FF),
                                   Color(0xffC589E4),
@@ -159,7 +159,7 @@ class _cardInfoState extends State<cardInfo> {
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            errorStyle: TextStyle(fontSize: 0.0),
+                            errorStyle: const TextStyle(fontSize: 0.0),
                             suffixIcon: _expiryDate.length < 5
                                 ? GestureDetector(
                                     onTap: () {
@@ -167,14 +167,14 @@ class _cardInfoState extends State<cardInfo> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: EdgeInsets.all(16),
+                                            padding: const EdgeInsets.all(16),
                                             height: 90,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Please input valid date',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -188,16 +188,16 @@ class _cardInfoState extends State<cardInfo> {
                                         ),
                                       );
                                     },
-                                    child: Icon(Icons.info),
+                                    child: const Icon(Icons.info),
                                   )
                                 : null,
                           ),
                           cvvCodeDecoration: InputDecoration(
-                            labelStyle: TextStyle(fontSize: 12.5),
+                            labelStyle: const TextStyle(fontSize: 12.5),
                             labelText: 'CVV',
                             hintText: 'xxx',
                             border: GradientOutlineInputBorder(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xff7762FF),
                                   Color(0xffC589E4),
@@ -206,7 +206,7 @@ class _cardInfoState extends State<cardInfo> {
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            errorStyle: TextStyle(fontSize: 0.0),
+                            errorStyle: const TextStyle(fontSize: 0.0),
                             suffixIcon: _cvvCode.length < 3
                                 ? GestureDetector(
                                     onTap: () {
@@ -214,14 +214,14 @@ class _cardInfoState extends State<cardInfo> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: EdgeInsets.all(16),
+                                            padding: const EdgeInsets.all(16),
                                             height: 90,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Please input valid CVV',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -235,14 +235,14 @@ class _cardInfoState extends State<cardInfo> {
                                         ),
                                       );
                                     },
-                                    child: Icon(Icons.info),
+                                    child: const Icon(Icons.info),
                                   )
                                 : null,
                           ),
                           cardHolderDecoration: InputDecoration(
                             labelText: 'Card Holder',
                             border: GradientOutlineInputBorder(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xff7762FF),
                                   Color(0xffC589E4),
@@ -251,7 +251,7 @@ class _cardInfoState extends State<cardInfo> {
                               ),
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            errorStyle: TextStyle(fontSize: 0.0),
+                            errorStyle: const TextStyle(fontSize: 0.0),
                             suffixIcon: _cardHolderName.length < 1
                                 ? GestureDetector(
                                     onTap: () {
@@ -259,14 +259,14 @@ class _cardInfoState extends State<cardInfo> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: EdgeInsets.all(16),
+                                            padding: const EdgeInsets.all(16),
                                             height: 90,
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Please input valid name',
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -280,14 +280,14 @@ class _cardInfoState extends State<cardInfo> {
                                         ),
                                       );
                                     },
-                                    child: Icon(Icons.info),
+                                    child: const Icon(Icons.info),
                                   )
                                 : null,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 25),
+                        padding: const EdgeInsets.only(top: 25),
                         child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
@@ -299,14 +299,14 @@ class _cardInfoState extends State<cardInfo> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(180, 56),
-                            backgroundColor: Color(0xff6958D6),
+                            minimumSize: const Size(180, 56),
+                            backgroundColor: const Color(0xff6958D6),
                             elevation: 0,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Continue',
                             style: TextStyle(
                               color: Colors.white, // Set the font color to red

@@ -41,13 +41,13 @@ class _confirmPasswordState extends State<confirmPassword> {
       canPop: false,
       child: Scaffold(
         body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height,
             ),
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 25,
                 right: 25,
               ),
@@ -56,21 +56,21 @@ class _confirmPasswordState extends State<confirmPassword> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 100),
-                    Image(
+                    const SizedBox(height: 100),
+                    const Image(
                       image: AssetImage('Icons/forgetPassword.png'),
                       width: 115,
                       height: 115,
                     ),
-                    SizedBox(height: 25),
-                    Text(
+                    const SizedBox(height: 25),
+                    const Text(
                       'Enter your password',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                     SizedBox(
                       height: 64,
                       width: 310,
@@ -84,7 +84,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                         textAlign: TextAlign.center,
                         obscureText: _isObsecuredf,
                         decoration: InputDecoration(
-                          errorStyle: TextStyle(fontSize: 0.0),
+                          errorStyle: const TextStyle(fontSize: 0.0),
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -94,14 +94,14 @@ class _confirmPasswordState extends State<confirmPassword> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Container(
-                                          padding: EdgeInsets.all(16),
+                                          padding: const EdgeInsets.all(16),
                                           height: 90,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color(0xFFC72C41),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20)),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             'Please enter your password',
                                             style: TextStyle(
                                               color: Colors.white,
@@ -115,7 +115,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                                       ),
                                     );
                                   },
-                                  child: Icon(Icons.info),
+                                  child: const Icon(Icons.info),
                                 ),
                               IconButton(
                                 padding:
@@ -131,9 +131,9 @@ class _confirmPasswordState extends State<confirmPassword> {
                               ),
                             ],
                           ),
-                          labelStyle: TextStyle(fontSize: 14.0),
+                          labelStyle: const TextStyle(fontSize: 14.0),
                           border: GradientOutlineInputBorder(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color(0xff7762FF),
                                 Color(0xffC589E4),
@@ -152,10 +152,10 @@ class _confirmPasswordState extends State<confirmPassword> {
                           }
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        style: TextStyle(fontSize: 22.0),
+                        style: const TextStyle(fontSize: 22.0),
                       ),
                     ),
-                    SizedBox(height: 35),
+                    const SizedBox(height: 35),
                     SizedBox(
                       height: 64,
                       width: 310,
@@ -171,7 +171,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                         textAlign: TextAlign.center,
                         obscureText: _isObsecureds,
                         decoration: InputDecoration(
-                          errorStyle: TextStyle(fontSize: 0.0),
+                          errorStyle: const TextStyle(fontSize: 0.0),
                           suffixIcon: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -181,14 +181,14 @@ class _confirmPasswordState extends State<confirmPassword> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Container(
-                                          padding: EdgeInsets.all(16),
+                                          padding: const EdgeInsets.all(16),
                                           height: 90,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Color(0xFFC72C41),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20)),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             'Passwords do not match',
                                             style: TextStyle(
                                               color: Colors.white,
@@ -202,7 +202,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                                       ),
                                     );
                                   },
-                                  child: Icon(Icons.info),
+                                  child: const Icon(Icons.info),
                                 ),
                               IconButton(
                                 padding:
@@ -218,9 +218,9 @@ class _confirmPasswordState extends State<confirmPassword> {
                               ),
                             ],
                           ),
-                          labelStyle: TextStyle(fontSize: 14.0),
+                          labelStyle: const TextStyle(fontSize: 14.0),
                           border: GradientOutlineInputBorder(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color(0xff7762FF),
                                 Color(0xffC589E4),
@@ -240,10 +240,10 @@ class _confirmPasswordState extends State<confirmPassword> {
                           }
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        style: TextStyle(fontSize: 22.0),
+                        style: const TextStyle(fontSize: 22.0),
                       ),
                     ),
-                    SizedBox(height: 70),
+                    const SizedBox(height: 70),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -253,19 +253,19 @@ class _confirmPasswordState extends State<confirmPassword> {
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => confirm()),
+                                    builder: (context) => const confirm()),
                               );
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(180, 56),
-                            backgroundColor: Color(0xff6958D6),
+                            minimumSize: const Size(180, 56),
+                            backgroundColor: const Color(0xff6958D6),
                             elevation: 0,
                             shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20))),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Continue',
                             style: TextStyle(
                               color: Colors.white,
