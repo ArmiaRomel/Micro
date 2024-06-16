@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458891563022",
+    "project_id": "micro-4b90c",
+    "storage_bucket": "micro-4b90c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458891563022:android:a3e68b55f5b3f6237eac5f",
+        "android_client_info": {
+          "package_name": "com.example.micro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkRtic3BbMpoSN__Vl5a143O826fgU-xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
