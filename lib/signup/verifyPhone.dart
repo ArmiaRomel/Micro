@@ -1,12 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:micro/gradient.dart';
 import 'package:micro/signup/signup.dart';
 import 'package:micro/signup/card.dart';
+import 'package:micro/signup/verifyFace.dart';
+import 'package:micro/signup/verifyFinger.dart';
 
 class verifyPhone extends StatefulWidget {
-  static const routeName = '/verifyPhone';
+  const verifyPhone({
+    Key? key,
+    this.firstName,
+    this.secondName,
+    this.phone,
+    this.email,
+    this.password,
+    required this.verificationId,
+  }) : super(key: key);
+
+  final String? firstName;
+  final String? secondName;
+  final String? phone;
+  final String? email;
+  final String? password;
+  final String verificationId;
+
+  static const routeName = '/verifyEmailV2';
 
   @override
   _verifyPhoneState createState() => _verifyPhoneState();
@@ -14,12 +35,73 @@ class verifyPhone extends StatefulWidget {
 
 class _verifyPhoneState extends State<verifyPhone> {
   List<TextEditingController> controllers =
-      List.generate(4, (index) => TextEditingController());
+      List.generate(6, (index) => TextEditingController());
+
+  void isLoading(bool isloading) {
+    isloading
+        ? showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Color(0xff7762FF),
+                backgroundColor: Colors.grey,
+              ));
+            })
+        : Navigator.of(context).pop();
+  }
+
+  Future<void> _checkAndAuthenticate() async {
+    bool isSupported = false;
+    try {
+      isSupported = await LocalAuthentication().isDeviceSupported();
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    if (!isSupported) {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => card()),
+      );
+    }
+
+    List<BiometricType> availableBiometrics = [];
+    try {
+      availableBiometrics =
+          await LocalAuthentication().getAvailableBiometrics();
+      print('Available biometrics: $availableBiometrics');
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    if (!mounted) {
+      return;
+    }
+
+    // if (availableBiometrics.contains(BiometricType.weak)) {
+    //   Navigator.push(
+    //     context,
+    //     CupertinoPageRoute(builder: (context) => verifyFace()),
+    //   );
+    // }
+    if (availableBiometrics.contains(BiometricType.strong)) {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => verifyFinger()),
+      );
+    } else {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => card()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
@@ -81,10 +163,10 @@ class _verifyPhoneState extends State<verifyPhone> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(
-                  4,
+                  6,
                   (index) => SizedBox(
                     height: 68,
-                    width: 64,
+                    width: 40,
                     child: TextField(
                       controller: controllers[index],
                       textAlign: TextAlign.center,
@@ -94,17 +176,35 @@ class _verifyPhoneState extends State<verifyPhone> {
                         FilteringTextInputFormatter.digitsOnly,
                       ],
                       style: Theme.of(context).textTheme.headline6,
-                      onChanged: (value) {
-                        if (value.length == 1 && index < 4) {
-                          FocusScope.of(context).nextFocus();
-                          if (controllers[0].text.length == 1 &&
-                              controllers[1].text.length == 1 &&
-                              controllers[2].text.length == 1 &&
-                              controllers[3].text.length == 1) {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(builder: (context) => card()),
-                            );
+                      onChanged: (value) async {
+                        if (value.length == 1) {
+                          if (index < 5) {
+                            FocusScope.of(context).nextFocus();
+                          } else {
+                            FocusScope.of(context).unfocus();
+                          }
+                          if (controllers.every(
+                              (controller) => controller.text.length == 1)) {
+                            try {
+                              PhoneAuthCredential credential =
+                                  await PhoneAuthProvider.credential(
+                                      verificationId: widget.verificationId,
+                                      smsCode: controllers
+                                          .map((controller) => controller.text)
+                                          .join());
+                              isLoading(true);
+                              FirebaseAuth.instance
+                                  .signInWithCredential(credential)
+                                  .then((value) {
+                                isLoading(false);
+                                // Navigator.push(
+                                //   context,
+                                //   CupertinoPageRoute(
+                                //       builder: (context) => card()),
+                                // );
+                                _checkAndAuthenticate();
+                              });
+                            } catch (ex) {}
                           }
                         }
                       },

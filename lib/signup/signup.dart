@@ -5,6 +5,7 @@ import 'package:micro/gradient.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:micro/login/login.dart';
 import 'package:micro/signup/verifyEmailV2.dart';
+import 'package:email_otp/email_otp.dart';
 
 final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 final RegExp uppercaseRegex = RegExp(r'[A-Z]');
@@ -29,11 +30,35 @@ class _SignupState extends State<Signup> {
       _email = '',
       _password = '';
 
+  final firstName = TextEditingController();
+  final secondName = TextEditingController();
+  final phone = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  EmailOTP myauth = EmailOTP();
+
+  bool isloading = false;
+
   @override
   void initState() {
     super.initState();
 
     _isObsecured = true;
+  }
+
+  void isLoading(bool isloading) {
+    isloading
+        ? showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Color(0xff7762FF),
+                backgroundColor: Colors.grey,
+              ));
+            })
+        : Navigator.of(context).pop();
   }
 
   @override
@@ -61,7 +86,8 @@ class _SignupState extends State<Signup> {
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                             context,
-                            CupertinoPageRoute(builder: (context) => Login()),
+                            CupertinoPageRoute(
+                                builder: (context) => const Login()),
                             (Route<dynamic> route) => false,
                           );
                         },
@@ -119,6 +145,7 @@ class _SignupState extends State<Signup> {
                             height: 64,
                             width: 150,
                             child: TextFormField(
+                              controller: firstName,
                               onChanged: (value) {
                                 setState(() {
                                   _firstName = value;
@@ -185,7 +212,7 @@ class _SignupState extends State<Signup> {
                               },
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              style: TextStyle(fontSize: 22.0),
+                              style: const TextStyle(fontSize: 22.0),
                             ),
                           ),
                         ],
@@ -194,6 +221,7 @@ class _SignupState extends State<Signup> {
                         height: 64,
                         width: 150,
                         child: TextFormField(
+                          controller: secondName,
                           onChanged: (value) {
                             setState(() {
                               _secondName = value;
@@ -265,6 +293,7 @@ class _SignupState extends State<Signup> {
                     height: 64,
                     width: 310,
                     child: TextFormField(
+                      controller: phone,
                       onChanged: (value) {
                         setState(() {
                           _phone = value;
@@ -338,6 +367,7 @@ class _SignupState extends State<Signup> {
                     height: 64,
                     width: 310,
                     child: TextFormField(
+                      controller: email,
                       onChanged: (value) {
                         setState(() {
                           _email = value;
@@ -438,6 +468,7 @@ class _SignupState extends State<Signup> {
                     height: 64,
                     width: 310,
                     child: TextFormField(
+                      controller: password,
                       onChanged: (value) {
                         setState(() {
                           _password = value;
@@ -642,13 +673,31 @@ class _SignupState extends State<Signup> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formkey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => verifyEmailV2()),
-                            );
+                            isLoading(true);
+                            myauth.setConfig(
+                                appEmail: "noreply@micro.com",
+                                appName: "Micro",
+                                userEmail: email.text,
+                                otpLength: 6,
+                                otpType: OTPType.digitsOnly);
+
+                            if (await myauth.sendOTP() == true) {
+                              isLoading(false);
+                              Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => verifyEmailV2(
+                                          firstName: firstName.text,
+                                          secondName: secondName.text,
+                                          phone: phone.text,
+                                          email: email.text,
+                                          password: password.text,
+                                          myauth: myauth,
+                                        )),
+                              );
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(

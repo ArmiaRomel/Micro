@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:micro/firebase_options.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:micro/signup/signup.dart';
+import 'package:micro/signup/verifyFace.dart';
+import 'package:micro/signup/verifyFinger.dart';
 import 'package:micro/signup/cardInfo.dart';
 import 'package:micro/signup/card.dart';
 import 'package:micro/signup/linkCard.dart';
@@ -17,8 +22,12 @@ import 'package:micro/transfer/confirmPassword.dart';
 import 'package:micro/transfer/confirm.dart';
 import 'package:micro/transfer/sent.dart';
 
-void main() {
-  runApp(CreateAccount());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const CreateAccount());
 }
 
 class CreateAccount extends StatelessWidget {
@@ -28,23 +37,27 @@ class CreateAccount extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: transfer(),
-      initialRoute: transfer.routeName,
+      initialRoute: Signup.routeName,
       routes: {
-        Login.routeName: (context) => Login(),
-        forget.routeName: (context) => forget(),
+        Login.routeName: (context) => const Login(),
+        forget.routeName: (context) => const forget(),
         resetWithPhone.routeName: (context) => resetWithPhone(),
-        resetPassword.routeName: (context) => resetPassword(),
-        Signup.routeName: (context) => Signup(),
-        verifyEmailV2.routeName: (context) => verifyEmailV2(),
-        verifyPhone.routeName: (context) => verifyPhone(),
+        resetPassword.routeName: (context) => const resetPassword(),
+        Signup.routeName: (context) => const Signup(),
+        verifyEmailV2.routeName: (context) => verifyEmailV2(
+              myauth: EmailOTP(),
+            ),
+        verifyPhone.routeName: (context) => verifyPhone(verificationId: ''),
         card.routeName: (context) => card(),
         linkCard.routeName: (context) => linkCard(),
-        cardInfo.routeName: (context) => cardInfo(),
+        cardInfo.routeName: (context) => const cardInfo(),
         homePage.routeName: (context) => homePage(),
-        transfer.routeName: (context) => transfer(),
-        confirmPassword.routeName: (context) => confirmPassword(),
-        confirm.routeName: (context) => confirm(),
-        sent.routeName: (context) => sent(),
+        transfer.routeName: (context) => const transfer(),
+        confirmPassword.routeName: (context) => const confirmPassword(),
+        confirm.routeName: (context) => const confirm(),
+        sent.routeName: (context) => const sent(),
+        verifyFace.routeName: (context) => verifyFace(),
+        verifyFinger.routeName: (context) => verifyFinger(),
       },
     );
   }

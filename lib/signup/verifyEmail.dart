@@ -146,13 +146,7 @@ class _verifyEmailState extends State<verifyEmail> {
                             if (_pinController1.text.length == 1 &&
                                 _pinController2.text.length == 1 &&
                                 _pinController3.text.length == 1 &&
-                                _pinController4.text.length == 1) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => verifyPhone()),
-                              );
-                            }
+                                _pinController4.text.length == 1) {}
                           }
                         };
                       },
