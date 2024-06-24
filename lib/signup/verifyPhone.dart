@@ -37,6 +37,9 @@ class _verifyPhoneState extends State<verifyPhone> {
   List<TextEditingController> controllers =
       List.generate(6, (index) => TextEditingController());
 
+  final LocalAuthentication auth = LocalAuthentication();
+  bool _isAuthenticating = false;
+
   void isLoading(bool isloading) {
     isloading
         ? showDialog(
@@ -51,10 +54,77 @@ class _verifyPhoneState extends State<verifyPhone> {
         : Navigator.of(context).pop();
   }
 
+  // Future<void> _checkAndAuthenticate() async {
+  //   bool authenticated = false;
+  //   _isAuthenticating = false;
+  //   while (!authenticated && !_isAuthenticating) {
+  //     setState(() {
+  //       _isAuthenticating = true;
+  //     });
+  //     try {
+  //       authenticated = await auth.authenticate(
+  //         localizedReason: 'Look at the camira',
+  //         options: const AuthenticationOptions(
+  //           stickyAuth: true,
+  //           biometricOnly: true,
+  //         ),
+  //       );
+  //     } on PlatformException catch (e) {
+  //       print(e);
+  //       _showRetryDialog();
+  //       return;
+  //     }
+
+  //     if (!mounted) return;
+
+  //     if (authenticated) {
+  //       setState(() {
+  //         _isAuthenticating = false;
+  //       });
+  //       Navigator.pushReplacement(
+  //         context,
+  //         CupertinoPageRoute(builder: (context) => card()),
+  //       );
+  //     } else {
+  //       _showRetryDialog();
+  //     }
+  //   }
+  // }
+
+  // void _showRetryDialog() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: const Text('Authentication Failed'),
+  //         content: const Text('Face ID not recognized. Try again?'),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //               _checkAndAuthenticate();
+  //             },
+  //             child: const Text('Retry'),
+  //           ),
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //               setState(() {
+  //                 _isAuthenticating = false;
+  //               });
+  //             },
+  //             child: const Text('Cancel'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
   Future<void> _checkAndAuthenticate() async {
     bool isSupported = false;
     try {
-      isSupported = await LocalAuthentication().isDeviceSupported();
+      isSupported = await auth.isDeviceSupported();
     } on Exception catch (e) {
       print(e);
     }
@@ -68,8 +138,7 @@ class _verifyPhoneState extends State<verifyPhone> {
 
     List<BiometricType> availableBiometrics = [];
     try {
-      availableBiometrics =
-          await LocalAuthentication().getAvailableBiometrics();
+      availableBiometrics = await auth.getAvailableBiometrics();
       print('Available biometrics: $availableBiometrics');
     } on Exception catch (e) {
       print(e);
@@ -85,11 +154,27 @@ class _verifyPhoneState extends State<verifyPhone> {
     //     CupertinoPageRoute(builder: (context) => verifyFace()),
     //   );
     // }
-    if (availableBiometrics.contains(BiometricType.strong)) {
-      Navigator.push(
-        context,
-        CupertinoPageRoute(builder: (context) => verifyFinger()),
-      );
+    if (availableBiometrics.contains(BiometricType.weak)) {
+      bool authenticated = false;
+      try {
+        authenticated = await auth.authenticate(
+          localizedReason: 'Insert your fingerprint',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+            biometricOnly: true,
+          ),
+        );
+      } on Exception catch (e) {
+        print(e);
+      }
+      if (!mounted) return;
+
+      if (authenticated) {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) => card()),
+        );
+      }
     } else {
       Navigator.push(
         context,
@@ -186,22 +271,17 @@ class _verifyPhoneState extends State<verifyPhone> {
                           if (controllers.every(
                               (controller) => controller.text.length == 1)) {
                             try {
+                              isLoading(true);
                               PhoneAuthCredential credential =
                                   await PhoneAuthProvider.credential(
                                       verificationId: widget.verificationId,
                                       smsCode: controllers
                                           .map((controller) => controller.text)
                                           .join());
-                              isLoading(true);
+                              isLoading(false);
                               FirebaseAuth.instance
                                   .signInWithCredential(credential)
                                   .then((value) {
-                                isLoading(false);
-                                // Navigator.push(
-                                //   context,
-                                //   CupertinoPageRoute(
-                                //       builder: (context) => card()),
-                                // );
                                 _checkAndAuthenticate();
                               });
                             } catch (ex) {}

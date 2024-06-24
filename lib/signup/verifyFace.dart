@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:micro/gradient.dart';
-// import 'package:flutter_local_auth_invisible/flutter_local_auth_invisible.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:micro/signup/card.dart';
 
 class verifyFace extends StatefulWidget {
   @override
@@ -10,35 +13,27 @@ class verifyFace extends StatefulWidget {
 }
 
 class _verifyFaceState extends State<verifyFace> {
-  // final LocalAuthentication auth = LocalAuthentication();
-  // String _authorized = 'Not Authorized';
+  static const platform = MethodChannel('com.example.micro/biometric');
+  String _authorized = 'Not Authorized';
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _authenticateWithFaceID();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _authenticateWithFaceID();
+  }
 
-  // Future<void> _authenticateWithFaceID() async {
-  //   bool authenticated = false;
-  //   try {
-  //     authenticated = await LocalAuthentication.authenticate(
-  //       localizedReason: 'Please authenticate to access this feature',
-  //       biometricOnly: true,
-  //     );
-  //   } on Exception catch (e) {
-  //     print(e);
-  //   }
-  //   if (!mounted) return;
-
-  //   setState(() {
-  //     _authorized = authenticated ? 'Authorized' : 'Not Authorized';
-  //   });
-
-  //   if (!authenticated) {
-  //     Navigator.pop(context, false); // Navigate back with failure
-  //   }
-  // }
+  Future<void> _authenticateWithFaceID() async {
+    String authorized;
+    try {
+      final bool result = await platform.invokeMethod('authenticateWithFace');
+      authorized = result ? 'Authorized' : 'Not Authorized';
+    } on PlatformException catch (e) {
+      authorized = "Failed to authenticate: '${e.message}'.";
+    }
+    setState(() {
+      _authorized = authorized;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

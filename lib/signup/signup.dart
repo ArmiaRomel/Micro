@@ -6,6 +6,7 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:micro/login/login.dart';
 import 'package:micro/signup/verifyEmailV2.dart';
 import 'package:email_otp/email_otp.dart';
+// import 'package:device_preview/device_preview.dart';
 
 final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 final RegExp uppercaseRegex = RegExp(r'[A-Z]');
@@ -63,14 +64,17 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
+    print(screenheight);
     return PopScope(
       canPop: false,
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: 25,
-              right: 25,
+            padding: EdgeInsets.only(
+              left: screenwidth / 14.4,
+              right: screenwidth / 14.4,
             ),
             child: Form(
               key: _formkey,
@@ -78,7 +82,7 @@ class _SignupState extends State<Signup> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 30),
+                  SizedBox(height: screenheight * 0.04213483146),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -104,24 +108,24 @@ class _SignupState extends State<Signup> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Image(
-                    image: AssetImage('Icons/logo.png'),
-                    width: 50,
-                    height: 50,
+                  SizedBox(height: screenheight / 44.5),
+                  Image(
+                    image: const AssetImage('Icons/logo.png'),
+                    width: screenwidth / 7.2,
+                    height: screenheight / 14.24,
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: screenheight / 44.5),
+                  Text(
                     'Welcome To Micro',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: (screenheight * 0.04213483146),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   // SizedBox(height: 16),
-                  const GradientText(
+                  GradientText(
                     text: 'Create an account to join Micro!',
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [
                         Color(0xff7762FF),
                         Color(0xffC589E4),
@@ -131,19 +135,19 @@ class _SignupState extends State<Signup> {
                       end: Alignment.bottomRight,
                     ),
                     style: TextStyle(
-                      fontSize: 15.0,
+                      fontSize: (screenheight * 0.02106741573),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  SizedBox(height: screenheight / 28.48),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         children: [
                           SizedBox(
-                            height: 64,
-                            width: 150,
+                            height: screenheight / 11.125,
+                            width: screenwidth / 2.4,
                             child: TextFormField(
                               controller: firstName,
                               onChanged: (value) {
@@ -154,7 +158,8 @@ class _SignupState extends State<Signup> {
                               textAlign: TextAlign.center,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelStyle: const TextStyle(fontSize: 14.0),
+                                labelStyle: TextStyle(
+                                    fontSize: (screenheight / 50.85714286)),
                                 border: GradientOutlineInputBorder(
                                   gradient: const LinearGradient(
                                     colors: [
@@ -163,7 +168,8 @@ class _SignupState extends State<Signup> {
                                       Color(0xffFC6590),
                                     ],
                                   ),
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(
+                                      ((screenheight + screenwidth) / 53.6)),
                                 ),
                                 labelText: 'First Name',
                                 errorStyle: const TextStyle(fontSize: 0.0),
@@ -174,20 +180,25 @@ class _SignupState extends State<Signup> {
                                               .showSnackBar(
                                             SnackBar(
                                               content: Container(
-                                                padding:
-                                                    const EdgeInsets.all(16),
-                                                height: 90,
-                                                decoration: const BoxDecoration(
-                                                  color: Color(0xFFC72C41),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
+                                                padding: EdgeInsets.all(
+                                                    (screenheight / 67)),
+                                                height:
+                                                    screenheight * 0.1264044944,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFFC72C41),
+                                                  borderRadius: BorderRadius
+                                                      .all(Radius.circular(
+                                                          ((screenheight +
+                                                                  screenwidth) /
+                                                              53.6))),
                                                 ),
-                                                child: const Text(
+                                                child: Text(
                                                   'First name should not be less than 3 characters',
                                                   style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 18,
+                                                    fontSize: (screenheight *
+                                                        0.01679104478),
                                                   ),
                                                 ),
                                               ),
@@ -212,14 +223,15 @@ class _SignupState extends State<Signup> {
                               },
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              style: const TextStyle(fontSize: 22.0),
+                              style: TextStyle(
+                                  fontSize: (screenheight * 0.020522388)),
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 64,
-                        width: 150,
+                        height: screenheight / 11.125,
+                        width: screenwidth / 2.4,
                         child: TextFormField(
                           controller: secondName,
                           onChanged: (value) {
@@ -230,7 +242,8 @@ class _SignupState extends State<Signup> {
                           textAlign: TextAlign.center,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelStyle: const TextStyle(fontSize: 14.0),
+                            labelStyle: TextStyle(
+                                fontSize: (screenheight / 50.85714286)),
                             border: GradientOutlineInputBorder(
                               gradient: const LinearGradient(
                                 colors: [
@@ -239,7 +252,8 @@ class _SignupState extends State<Signup> {
                                   Color(0xffFC6590),
                                 ],
                               ),
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(
+                                  ((screenheight + screenwidth) / 53.6)),
                             ),
                             labelText: 'Last Name',
                             errorStyle: const TextStyle(fontSize: 0.0),
@@ -250,18 +264,23 @@ class _SignupState extends State<Signup> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: const EdgeInsets.all(16),
-                                            height: 90,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFFC72C41),
+                                            padding: EdgeInsets.all(
+                                                (screenheight / 67)),
+                                            height: screenheight * 0.1264044944,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
+                                                  Radius.circular(
+                                                      ((screenheight +
+                                                              screenwidth) /
+                                                          53.6))),
                                             ),
-                                            child: const Text(
+                                            child: Text(
                                               'Last name should not be less than 3 characters',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 18,
+                                                fontSize: (screenheight *
+                                                    0.01679104478),
                                               ),
                                             ),
                                           ),
@@ -283,15 +302,16 @@ class _SignupState extends State<Signup> {
                             }
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          style: const TextStyle(fontSize: 22.0),
+                          style:
+                              TextStyle(fontSize: (screenheight * 0.020522388)),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: screenheight / 44.5),
                   SizedBox(
-                    height: 64,
-                    width: 310,
+                    height: screenheight / 11.125,
+                    width: screenwidth / 1.161290323,
                     child: TextFormField(
                       controller: phone,
                       onChanged: (value) {
@@ -307,7 +327,9 @@ class _SignupState extends State<Signup> {
                         LengthLimitingTextInputFormatter(11),
                       ],
                       decoration: InputDecoration(
-                        labelStyle: const TextStyle(fontSize: 14.0),
+                        labelStyle: TextStyle(
+                          fontSize: (screenheight / 50.85714286),
+                        ),
                         border: GradientOutlineInputBorder(
                           gradient: const LinearGradient(
                             colors: [
@@ -316,7 +338,8 @@ class _SignupState extends State<Signup> {
                               Color(0xffFC6590),
                             ],
                           ),
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(
+                              ((screenheight + screenwidth) / 53.6)),
                         ),
                         labelText: 'Phone Number',
                         errorStyle: const TextStyle(fontSize: 0.0),
@@ -326,18 +349,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Phone number should not be less than 11 numbers',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -359,13 +386,13 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: const TextStyle(fontSize: 22.0),
+                      style: TextStyle(fontSize: (screenheight * 0.020522388)),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: screenheight / 44.5),
                   SizedBox(
-                    height: 64,
-                    width: 310,
+                    height: screenheight / 11.125,
+                    width: screenwidth / 1.161290323,
                     child: TextFormField(
                       controller: email,
                       onChanged: (value) {
@@ -376,7 +403,9 @@ class _SignupState extends State<Signup> {
                       textAlign: TextAlign.center,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelStyle: const TextStyle(fontSize: 14.0),
+                        labelStyle: TextStyle(
+                          fontSize: (screenheight / 50.85714286),
+                        ),
                         border: GradientOutlineInputBorder(
                           gradient: const LinearGradient(
                             colors: [
@@ -385,7 +414,8 @@ class _SignupState extends State<Signup> {
                               Color(0xffFC6590),
                             ],
                           ),
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(
+                              ((screenheight + screenwidth) / 53.6)),
                         ),
                         labelText: 'Email',
                         errorStyle: const TextStyle(fontSize: 0.0),
@@ -395,18 +425,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Email is required',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -425,18 +459,23 @@ class _SignupState extends State<Signup> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Container(
-                                            padding: const EdgeInsets.all(16),
-                                            height: 90,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFFC72C41),
+                                            padding: EdgeInsets.all(
+                                                (screenheight / 67)),
+                                            height: screenheight * 0.1264044944,
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
+                                                  Radius.circular(
+                                                      ((screenheight +
+                                                              screenwidth) /
+                                                          53.6))),
                                             ),
-                                            child: const Text(
+                                            child: Text(
                                               'Invalid email format',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 18,
+                                                fontSize: (screenheight *
+                                                    0.01679104478),
                                               ),
                                             ),
                                           ),
@@ -460,13 +499,13 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: const TextStyle(fontSize: 22.0),
+                      style: TextStyle(fontSize: (screenheight * 0.020522388)),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: screenheight / 44.5),
                   SizedBox(
-                    height: 64,
-                    width: 310,
+                    height: screenheight / 11.125,
+                    width: screenwidth / 1.161290323,
                     child: TextFormField(
                       controller: password,
                       onChanged: (value) {
@@ -487,18 +526,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Password should not be less than 8 characters',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -516,18 +559,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Password must contain at least one uppercase letter',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -545,18 +592,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Password must contain at least one lowercase letter',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -574,18 +625,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Password must contain at least one digit',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -603,18 +658,22 @@ class _SignupState extends State<Signup> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        height: 90,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFFC72C41),
+                                        padding:
+                                            EdgeInsets.all((screenheight / 67)),
+                                        height: screenheight * 0.1264044944,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                                              Radius.circular(((screenheight +
+                                                      screenwidth) /
+                                                  53.6))),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Password must contain at least one special character',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
+                                            fontSize:
+                                                (screenheight * 0.01679104478),
                                           ),
                                         ),
                                       ),
@@ -640,7 +699,9 @@ class _SignupState extends State<Signup> {
                             ),
                           ],
                         ),
-                        labelStyle: const TextStyle(fontSize: 14.0),
+                        labelStyle: TextStyle(
+                          fontSize: (screenheight / 50.85714286),
+                        ),
                         border: GradientOutlineInputBorder(
                           gradient: const LinearGradient(
                             colors: [
@@ -649,7 +710,8 @@ class _SignupState extends State<Signup> {
                               Color(0xffFC6590),
                             ],
                           ),
-                          borderRadius: BorderRadius.circular(20.0),
+                          borderRadius: BorderRadius.circular(
+                              ((screenheight + screenwidth) / 53.6)),
                         ),
                         labelText: 'Password',
                       ),
@@ -665,10 +727,10 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: const TextStyle(fontSize: 22.0),
+                      style: TextStyle(fontSize: (screenheight * 0.020522388)),
                     ),
                   ),
-                  const SizedBox(height: 35),
+                  SizedBox(height: screenheight / 20.34285714),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -701,23 +763,25 @@ class _SignupState extends State<Signup> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(180, 56),
+                          minimumSize:
+                              Size(screenwidth / 2, screenheight / 12.71428571),
                           backgroundColor: const Color(0xff6958D6),
                           elevation: 0,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                  ((screenheight + screenwidth) / 53.6)))),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Create Account',
                           style: TextStyle(
-                            color: Colors.white, // Set the font color to red
+                            color: Colors.white,
+                            fontSize: (screenheight / 50.85714286),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: screenheight / 44.5),
                 ],
               ),
             ),

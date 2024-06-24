@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:micro/gradient.dart';
-// import 'package:flutter_local_auth_invisible/flutter_local_auth_invisible.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:micro/signup/card.dart';
 
 class verifyFinger extends StatefulWidget {
@@ -15,34 +14,42 @@ class verifyFinger extends StatefulWidget {
 
 class _verifyFingerState extends State<verifyFinger> {
   final LocalAuthentication auth = LocalAuthentication();
-  String _authorized = 'Not Authorized';
 
   @override
   void initState() {
     super.initState();
-    _authenticateWithFingerprint();
+    _authenticateWithFaceID();
   }
 
-  Future<void> _authenticateWithFingerprint() async {
+  Future<void> _authenticateWithFaceID() async {
+    bool authenticated = false;
     try {
-      bool authenticated = await auth.authenticate(
-        localizedReason: 'Please authenticate to access this feature',
+      authenticated = await auth.authenticate(
+        localizedReason: 'Insert your fingerprint',
         options: const AuthenticationOptions(
           stickyAuth: true,
           biometricOnly: true,
         ),
       );
-    } on PlatformException catch (e) {
+    } on Exception catch (e) {
       print(e);
+    }
+    if (!mounted) return;
+
+    if (authenticated) {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) => card()),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.only(
+        padding: EdgeInsets.only(
           left: 25,
           right: 25,
           bottom: 50,
@@ -52,19 +59,19 @@ class _verifyFingerState extends State<verifyFinger> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Image(
+            Image(
               image: AssetImage('Icons/verify.png'),
               width: 115,
               height: 115,
             ),
-            const Text(
+            Text(
               'Set up Fingerprint',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const GradientText(
+            GradientText(
               text: 'Please authenticate your fingerprint',
               gradient: LinearGradient(
                 colors: [
@@ -80,26 +87,14 @@ class _verifyFingerState extends State<verifyFinger> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 30),
-            const Row(
+            SizedBox(height: 30),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
                   image: AssetImage('Icons/fingerID.png'),
                   width: 175,
                   height: 175,
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  _authorized,
-                  style: const TextStyle(
-                    color: Colors.red,
-                  ),
                 ),
               ],
             ),
