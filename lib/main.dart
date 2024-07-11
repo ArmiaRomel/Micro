@@ -103,19 +103,3 @@ class CreateAccount extends StatelessWidget {
     );
   }
 }
-// cardInfo
-// card
-// Signup
-// verifyEmailV2
-// linkCard
-// loginFace
-// loginFinger
-// Login
-// forget
-// resetPassword
-// homePage
-// transferFace
-// transferFinger
-// confirmPassword
-// confirm
-// sent
