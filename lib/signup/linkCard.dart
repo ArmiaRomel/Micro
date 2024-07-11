@@ -3,6 +3,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:micro/signup/cardInfo.dart';
 
 class linkCard extends StatefulWidget {
+  const linkCard(
+      {Key? Key,
+      this.firstName,
+      this.secondName,
+      this.phone,
+      this.email,
+      this.password,
+      required this.userID})
+      : super(key: Key);
+
+  final String? firstName;
+  final String? secondName;
+  final String? phone;
+  final String? email;
+  final String? password;
+  final String userID;
+
   static const routeName = '/linkCard';
 
   @override
@@ -55,7 +72,14 @@ class _linkCardState extends State<linkCard> {
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => const cardInfo()),
+                                    builder: (context) => cardInfo(
+                                          firstName: widget.firstName,
+                                          secondName: widget.secondName,
+                                          phone: widget.phone,
+                                          email: widget.email,
+                                          password: widget.password,
+                                          userID: widget.userID,
+                                        )),
                               );
                             },
                             style: ElevatedButton.styleFrom(

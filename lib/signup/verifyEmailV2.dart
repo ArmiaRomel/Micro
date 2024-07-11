@@ -181,26 +181,7 @@ class _verifyEmailV2State extends State<verifyEmailV2> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                    ),
-                    child: const Text(
-                      'Resend Code',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 130),
             ],
           ),
         ),

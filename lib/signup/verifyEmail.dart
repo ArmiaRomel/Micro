@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:micro/gradient.dart';
-import 'package:micro/signup/verifyPhone.dart';
 
 class verifyEmail extends StatefulWidget {
   const verifyEmail({super.key});

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:micro/gradient.dart';
@@ -18,6 +20,75 @@ class forget extends StatefulWidget {
 
 class _forgetState extends State<forget> {
   String _phone = '';
+
+  final phone = TextEditingController();
+
+  void isLoading(bool isloading) {
+    isloading
+        ? showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Color(0xff7762FF),
+                backgroundColor: Colors.grey,
+              ));
+            })
+        : Navigator.of(context).pop();
+  }
+
+  Future<void> checkPhone() async {
+    try {
+      QuerySnapshot phoneQuery = await FirebaseFirestore.instance
+          .collection('users')
+          .where('phone', isEqualTo: phone.text)
+          .get();
+
+      if (phoneQuery.docs.isNotEmpty) {
+        String userId = phoneQuery.docs.first.id;
+        String phoneNumber = '+2${phone.text}';
+        await FirebaseAuth.instance.verifyPhoneNumber(
+            verificationCompleted: (PhoneAuthCredential credential) {},
+            verificationFailed: (FirebaseAuthException ex) {},
+            codeSent: (String verificationId, int? resendtoken) {
+              isLoading(false);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => resetWithPhone(
+                    verificationId: verificationId,
+                    userId: userId,
+                  ),
+                ),
+              );
+            },
+            codeAutoRetrievalTimeout: (String verficationId) {},
+            phoneNumber: phoneNumber);
+        ;
+      } else {
+        isLoading(false);
+        _showErrorDialog('Email or password are invalid');
+      }
+    } catch (e) {
+      isLoading(false);
+      _showErrorDialog('Something went wrong');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text('Invalid Phone Number'),
+              content: Text(message),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('OK'),
+                ),
+              ],
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +117,7 @@ class _forgetState extends State<forget> {
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
                           context,
-                          CupertinoPageRoute(
-                              builder: (context) => const Login()),
+                          CupertinoPageRoute(builder: (context) => Login()),
                           (Route<dynamic> route) => false,
                         );
                       },
@@ -92,6 +162,7 @@ class _forgetState extends State<forget> {
                   height: 64,
                   width: 310,
                   child: TextFormField(
+                    controller: phone,
                     onChanged: (value) {
                       setState(() {
                         _phone = value;
@@ -165,13 +236,10 @@ class _forgetState extends State<forget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formkey.currentState!.validate()) {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (context) => resetWithPhone()),
-                          );
+                          isLoading(true);
+                          checkPhone();
                         }
                       },
                       style: ElevatedButton.styleFrom(

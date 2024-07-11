@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:micro/transfer/confirm.dart';
 
@@ -15,7 +17,14 @@ bool _passwordsMatch = true;
 
 class confirmPassword extends StatefulWidget {
   static const routeName = '/confirmPassword';
-  const confirmPassword({Key? Key}) : super(key: Key);
+  const confirmPassword(
+      {Key? Key,
+      required this.userId,
+      required this.userExists,
+      required this.amount})
+      : super(key: Key);
+
+  final String userId, userExists, amount;
 
   @override
   State<confirmPassword> createState() => _confirmPasswordState();
@@ -33,6 +42,42 @@ class _confirmPasswordState extends State<confirmPassword> {
 
     _isObsecuredf = true;
     _isObsecureds = true;
+  }
+
+  Future<bool> checkUserPassword(String userId, String providedPassword) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore
+          .instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      String storedPassword = userDoc.data()?['password'];
+      return storedPassword == providedPassword;
+    } catch (e) {
+      print('Error checking password: $e');
+      return false;
+    }
+  }
+
+  void _showRetryDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Invalid Password'),
+          content: const Text('Your password is incorrect'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Retry'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -248,13 +293,24 @@ class _confirmPasswordState extends State<confirmPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formkey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => const confirm()),
-                              );
+                              bool isPasswordCorrect = await checkUserPassword(
+                                  widget.userId, _passwordController.text);
+
+                              if (isPasswordCorrect) {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => confirm(
+                                            userId: widget.userId,
+                                            userExists: widget.userExists,
+                                            amount: widget.amount,
+                                          )),
+                                );
+                              } else {
+                                _showRetryDialog();
+                              }
                             }
                           },
                           style: ElevatedButton.styleFrom(

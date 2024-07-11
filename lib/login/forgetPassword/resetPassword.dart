@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:micro/gradient.dart';
 import 'package:micro/login/login.dart';
@@ -16,7 +17,9 @@ bool _passwordsMatch = true;
 
 class resetPassword extends StatefulWidget {
   static const routeName = '/resetPassword';
-  const resetPassword({Key? Key}) : super(key: Key);
+  const resetPassword({Key? Key, required this.userId}) : super(key: Key);
+
+  final String userId;
 
   @override
   State<resetPassword> createState() => _resetPasswordState();
@@ -424,8 +427,30 @@ class _resetPasswordState extends State<resetPassword> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formkey.currentState!.validate()) {
+                              try {
+                                await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(widget.userId)
+                                    .update(
+                                        {'password': _passwordController.text});
+                              } catch (e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: const Text('Error'),
+                                          content: const Text(
+                                              'Something went wrong, please try again'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        ));
+                              }
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 CupertinoPageRoute(

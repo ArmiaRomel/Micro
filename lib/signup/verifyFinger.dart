@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:micro/gradient.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:micro/signup/card.dart';
 
 class verifyFinger extends StatefulWidget {
   @override
@@ -37,10 +36,10 @@ class _verifyFingerState extends State<verifyFinger> {
     if (!mounted) return;
 
     if (authenticated) {
-      Navigator.push(
-        context,
-        CupertinoPageRoute(builder: (context) => card()),
-      );
+      // Navigator.push(
+      //   context,
+      //   CupertinoPageRoute(builder: (context) => card()),
+      // );
     }
   }
 

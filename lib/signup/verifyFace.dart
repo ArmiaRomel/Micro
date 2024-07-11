@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:micro/gradient.dart';
-import 'package:local_auth/local_auth.dart';
-import 'package:micro/signup/card.dart';
 
 class verifyFace extends StatefulWidget {
   @override

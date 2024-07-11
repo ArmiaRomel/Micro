@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:micro/gradient.dart';
 import 'package:micro/signup/signup.dart';
 import 'package:micro/signup/card.dart';
-import 'package:micro/signup/verifyFace.dart';
-import 'package:micro/signup/verifyFinger.dart';
 
 class verifyPhone extends StatefulWidget {
   const verifyPhone({
@@ -57,6 +56,7 @@ class _verifyPhoneState extends State<verifyPhone> {
   // Future<void> _checkAndAuthenticate() async {
   //   bool authenticated = false;
   //   _isAuthenticating = false;
+  //   isLoading(false);
   //   while (!authenticated && !_isAuthenticating) {
   //     setState(() {
   //       _isAuthenticating = true;
@@ -81,10 +81,16 @@ class _verifyPhoneState extends State<verifyPhone> {
   //       setState(() {
   //         _isAuthenticating = false;
   //       });
-  //       Navigator.pushReplacement(
-  //         context,
-  //         CupertinoPageRoute(builder: (context) => card()),
-  //       );
+  //       Navigator.push(
+  //       context,
+  //       CupertinoPageRoute(
+  //           builder: (context) => card(
+  //               firstName: widget.firstName,
+  //               secondName: widget.secondName,
+  //               phone: widget.phone,
+  //               email: widget.email,
+  //               password: widget.password)),
+  //     );
   //     } else {
   //       _showRetryDialog();
   //     }
@@ -121,7 +127,7 @@ class _verifyPhoneState extends State<verifyPhone> {
   //   );
   // }
 
-  Future<void> _checkAndAuthenticate() async {
+  Future<void> _checkAndAuthenticate(UserCredential value) async {
     bool isSupported = false;
     try {
       isSupported = await auth.isDeviceSupported();
@@ -130,10 +136,24 @@ class _verifyPhoneState extends State<verifyPhone> {
     }
 
     if (!isSupported) {
-      Navigator.push(
-        context,
-        CupertinoPageRoute(builder: (context) => card()),
-      );
+      isLoading(false);
+      User? phoneUser = value.user!;
+      String userId;
+      if (phoneUser != null) {
+        userId = phoneUser.uid;
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => card(
+                    firstName: widget.firstName,
+                    secondName: widget.secondName,
+                    phone: widget.phone,
+                    email: widget.email,
+                    password: widget.password,
+                    userID: userId,
+                  )),
+        );
+      }
     }
 
     List<BiometricType> availableBiometrics = [];
@@ -148,13 +168,8 @@ class _verifyPhoneState extends State<verifyPhone> {
       return;
     }
 
-    // if (availableBiometrics.contains(BiometricType.weak)) {
-    //   Navigator.push(
-    //     context,
-    //     CupertinoPageRoute(builder: (context) => verifyFace()),
-    //   );
-    // }
     if (availableBiometrics.contains(BiometricType.weak)) {
+      isLoading(false);
       bool authenticated = false;
       try {
         authenticated = await auth.authenticate(
@@ -170,16 +185,25 @@ class _verifyPhoneState extends State<verifyPhone> {
       if (!mounted) return;
 
       if (authenticated) {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(builder: (context) => card()),
-        );
+        isLoading(false);
+        User? phoneUser = value.user;
+        String userId;
+        if (phoneUser != null) {
+          userId = phoneUser.uid;
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => card(
+                      firstName: widget.firstName,
+                      secondName: widget.secondName,
+                      phone: widget.phone,
+                      email: widget.email,
+                      password: widget.password,
+                      userID: userId,
+                    )),
+          );
+        }
       }
-    } else {
-      Navigator.push(
-        context,
-        CupertinoPageRoute(builder: (context) => card()),
-      );
     }
   }
 
@@ -271,18 +295,20 @@ class _verifyPhoneState extends State<verifyPhone> {
                           if (controllers.every(
                               (controller) => controller.text.length == 1)) {
                             try {
-                              isLoading(true);
                               PhoneAuthCredential credential =
                                   await PhoneAuthProvider.credential(
                                       verificationId: widget.verificationId,
                                       smsCode: controllers
                                           .map((controller) => controller.text)
                                           .join());
-                              isLoading(false);
+                              isLoading(true);
                               FirebaseAuth.instance
                                   .signInWithCredential(credential)
                                   .then((value) {
-                                _checkAndAuthenticate();
+                                isLoading(true);
+                                _checkAndAuthenticate(value);
+                              }).catchError((error) {
+                                isLoading(false);
                               });
                             } catch (ex) {}
                           }
@@ -292,26 +318,7 @@ class _verifyPhoneState extends State<verifyPhone> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                    ),
-                    child: const Text(
-                      'Resend Code',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 130),
             ],
           ),
         ),

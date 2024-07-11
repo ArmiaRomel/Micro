@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -9,18 +11,184 @@ import 'package:micro/login/forgetPassword/resetPassword.dart';
 class resetWithPhone extends StatefulWidget {
   static const routeName = '/resetWithPhone';
 
+  const resetWithPhone(
+      {Key? key, required this.verificationId, required this.userId})
+      : super(key: key);
+  final String verificationId, userId;
+
   @override
   _resetWithPhoneState createState() => _resetWithPhoneState();
 }
 
 class _resetWithPhoneState extends State<resetWithPhone> {
   List<TextEditingController> controllers =
-      List.generate(4, (index) => TextEditingController());
+      List.generate(6, (index) => TextEditingController());
+
+  final LocalAuthentication auth = LocalAuthentication();
+  bool _isAuthenticating = false;
+
+  void isLoading(bool isloading) {
+    isloading
+        ? showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Color(0xff7762FF),
+                backgroundColor: Colors.grey,
+              ));
+            })
+        : Navigator.of(context).pop();
+  }
+
+  // Future<void> _checkAndAuthenticate() async {
+  //   bool authenticated = false;
+  //   _isAuthenticating = false;
+  //   isLoading(false);
+  //   while (!authenticated && !_isAuthenticating) {
+  //     setState(() {
+  //       _isAuthenticating = true;
+  //     });
+  //     try {
+  //       authenticated = await auth.authenticate(
+  //         localizedReason: 'Look at the camira',
+  //         options: const AuthenticationOptions(
+  //           stickyAuth: true,
+  //           biometricOnly: true,
+  //         ),
+  //       );
+  //     } on PlatformException catch (e) {
+  //       print(e);
+  //       _showRetryDialog();
+  //       return;
+  //     }
+
+  //     if (!mounted) return;
+
+  //     if (authenticated) {
+  //       setState(() {
+  //         _isAuthenticating = false;
+  //       });
+  //       Navigator.push(
+  //       context,
+  //       CupertinoPageRoute(
+  //           builder: (context) => card(
+  //               firstName: widget.firstName,
+  //               secondName: widget.secondName,
+  //               phone: widget.phone,
+  //               email: widget.email,
+  //               password: widget.password)),
+  //     );
+  //     } else {
+  //       _showRetryDialog();
+  //     }
+  //   }
+  // }
+
+  // void _showRetryDialog() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: const Text('Authentication Failed'),
+  //         content: const Text('Face ID not recognized. Try again?'),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //               _checkAndAuthenticate();
+  //             },
+  //             child: const Text('Retry'),
+  //           ),
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //               setState(() {
+  //                 _isAuthenticating = false;
+  //               });
+  //             },
+  //             child: const Text('Cancel'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  Future<void> _checkAndAuthenticate(UserCredential value) async {
+    bool isSupported = false;
+    try {
+      isSupported = await auth.isDeviceSupported();
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    if (!isSupported) {
+      isLoading(false);
+      User? phoneUser = value.user!;
+      String userId;
+      if (phoneUser != null) {
+        userId = phoneUser.uid;
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => resetPassword(
+                    userId: widget.userId,
+                  )),
+        );
+      }
+    }
+
+    List<BiometricType> availableBiometrics = [];
+    try {
+      availableBiometrics = await auth.getAvailableBiometrics();
+      print('Available biometrics: $availableBiometrics');
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    if (!mounted) {
+      return;
+    }
+
+    if (availableBiometrics.contains(BiometricType.weak)) {
+      isLoading(false);
+      bool authenticated = false;
+      try {
+        authenticated = await auth.authenticate(
+          localizedReason: 'Insert your fingerprint',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+            biometricOnly: true,
+          ),
+        );
+      } on Exception catch (e) {
+        print(e);
+      }
+      if (!mounted) return;
+
+      if (authenticated) {
+        isLoading(false);
+        User? phoneUser = value.user;
+        String userId;
+        if (phoneUser != null) {
+          userId = phoneUser.uid;
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => resetPassword(
+                      userId: widget.userId,
+                    )),
+          );
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
@@ -82,10 +250,10 @@ class _resetWithPhoneState extends State<resetWithPhone> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(
-                  4,
+                  6,
                   (index) => SizedBox(
                     height: 68,
-                    width: 64,
+                    width: 40,
                     child: TextField(
                       controller: controllers[index],
                       textAlign: TextAlign.center,
@@ -95,18 +263,32 @@ class _resetWithPhoneState extends State<resetWithPhone> {
                         FilteringTextInputFormatter.digitsOnly,
                       ],
                       style: Theme.of(context).textTheme.headline6,
-                      onChanged: (value) {
-                        if (value.length == 1 && index < 4) {
-                          FocusScope.of(context).nextFocus();
-                          if (controllers[0].text.length == 1 &&
-                              controllers[1].text.length == 1 &&
-                              controllers[2].text.length == 1 &&
-                              controllers[3].text.length == 1) {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => const resetPassword()),
-                            );
+                      onChanged: (value) async {
+                        if (value.length == 1) {
+                          if (index < 5) {
+                            FocusScope.of(context).nextFocus();
+                          } else {
+                            FocusScope.of(context).unfocus();
+                          }
+                          if (controllers.every(
+                              (controller) => controller.text.length == 1)) {
+                            try {
+                              PhoneAuthCredential credential =
+                                  await PhoneAuthProvider.credential(
+                                      verificationId: widget.verificationId,
+                                      smsCode: controllers
+                                          .map((controller) => controller.text)
+                                          .join());
+                              isLoading(true);
+                              FirebaseAuth.instance
+                                  .signInWithCredential(credential)
+                                  .then((value) {
+                                isLoading(true);
+                                _checkAndAuthenticate(value);
+                              }).catchError((error) {
+                                isLoading(false);
+                              });
+                            } catch (ex) {}
                           }
                         }
                       },
@@ -118,35 +300,18 @@ class _resetWithPhoneState extends State<resetWithPhone> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          'Resend Code',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                    ),
+                    child: const Text(
+                      'Resend Code',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          'Reset password with Email',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),

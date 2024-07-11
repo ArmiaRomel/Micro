@@ -7,7 +7,14 @@ import 'package:micro/homePage/homePage.dart';
 
 class sent extends StatefulWidget {
   static const routeName = '/sent';
-  const sent({super.key});
+  const sent(
+      {Key? Key,
+      required this.userId,
+      required this.name,
+      required this.amount})
+      : super(key: Key);
+
+  final String userId, name, amount;
 
   @override
   State<sent> createState() => _sentState();
@@ -29,7 +36,10 @@ class _sentState extends State<sent> {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    CupertinoPageRoute(builder: (context) => homePage()),
+                    CupertinoPageRoute(
+                        builder: (context) => homePage(
+                              userId: widget.userId,
+                            )),
                     (Route<dynamic> route) => false,
                   );
                 },
@@ -121,9 +131,9 @@ class _sentState extends State<sent> {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  const GradientText(
-                    text: "Armia Romel",
-                    gradient: LinearGradient(
+                  GradientText(
+                    text: widget.name,
+                    gradient: const LinearGradient(
                       colors: [
                         Color(0xff7762FF),
                         Color(0xffC589E4),
@@ -132,15 +142,15 @@ class _sentState extends State<sent> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 15),
-                  const Text(
-                    '\$150',
-                    style: TextStyle(
+                  Text(
+                    widget.amount,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 32,
                       fontWeight: FontWeight.bold,

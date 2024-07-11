@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:micro/gradient.dart';
@@ -13,6 +14,26 @@ final RegExp uppercaseRegex = RegExp(r'[A-Z]');
 final RegExp lowercaseRegex = RegExp(r'[a-z]');
 final RegExp digitRegex = RegExp(r'[0-9]');
 final RegExp specialCharRegex = RegExp(r'[\W_]+');
+
+class AuthService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<bool> checkUserExists(String email, String phone) async {
+    QuerySnapshot emailQuery = await _firestore
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get();
+    QuerySnapshot phoneQuery = await _firestore
+        .collection('users')
+        .where('phone', isEqualTo: phone)
+        .get();
+
+    if (emailQuery.docs.isNotEmpty || phoneQuery.docs.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+}
 
 class Signup extends StatefulWidget {
   const Signup({Key? Key}) : super(key: Key);
@@ -60,6 +81,33 @@ class _SignupState extends State<Signup> {
               ));
             })
         : Navigator.of(context).pop();
+  }
+
+  final AuthService _authService = AuthService();
+
+  Future<bool> signUp() async {
+    bool userExists =
+        await _authService.checkUserExists(email.text, phone.text);
+    if (userExists) {
+      isLoading(false);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('User already exists'),
+          content:
+              const Text('The email or phone number is already registered.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+      return false;
+    } else {
+      return true;
+    }
   }
 
   @override
@@ -115,17 +163,17 @@ class _SignupState extends State<Signup> {
                     height: screenheight / 14.24,
                   ),
                   SizedBox(height: screenheight / 44.5),
-                  Text(
+                  const Text(
                     'Welcome To Micro',
                     style: TextStyle(
-                      fontSize: (screenheight * 0.04213483146),
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   // SizedBox(height: 16),
-                  GradientText(
+                  const GradientText(
                     text: 'Create an account to join Micro!',
-                    gradient: const LinearGradient(
+                    gradient: LinearGradient(
                       colors: [
                         Color(0xff7762FF),
                         Color(0xffC589E4),
@@ -135,7 +183,7 @@ class _SignupState extends State<Signup> {
                       end: Alignment.bottomRight,
                     ),
                     style: TextStyle(
-                      fontSize: (screenheight * 0.02106741573),
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -158,8 +206,7 @@ class _SignupState extends State<Signup> {
                               textAlign: TextAlign.center,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelStyle: TextStyle(
-                                    fontSize: (screenheight / 50.85714286)),
+                                labelStyle: const TextStyle(fontSize: 14),
                                 border: GradientOutlineInputBorder(
                                   gradient: const LinearGradient(
                                     colors: [
@@ -168,8 +215,7 @@ class _SignupState extends State<Signup> {
                                       Color(0xffFC6590),
                                     ],
                                   ),
-                                  borderRadius: BorderRadius.circular(
-                                      ((screenheight + screenwidth) / 53.6)),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
                                 labelText: 'First Name',
                                 errorStyle: const TextStyle(fontSize: 0.0),
@@ -184,21 +230,17 @@ class _SignupState extends State<Signup> {
                                                     (screenheight / 67)),
                                                 height:
                                                     screenheight * 0.1264044944,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFFC72C41),
-                                                  borderRadius: BorderRadius
-                                                      .all(Radius.circular(
-                                                          ((screenheight +
-                                                                  screenwidth) /
-                                                              53.6))),
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xFFC72C41),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(20)),
                                                 ),
-                                                child: Text(
+                                                child: const Text(
                                                   'First name should not be less than 3 characters',
                                                   style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: (screenheight *
-                                                        0.01679104478),
+                                                    fontSize: 18,
                                                   ),
                                                 ),
                                               ),
@@ -223,8 +265,7 @@ class _SignupState extends State<Signup> {
                               },
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              style: TextStyle(
-                                  fontSize: (screenheight * 0.020522388)),
+                              style: const TextStyle(fontSize: 22),
                             ),
                           ),
                         ],
@@ -242,8 +283,7 @@ class _SignupState extends State<Signup> {
                           textAlign: TextAlign.center,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelStyle: TextStyle(
-                                fontSize: (screenheight / 50.85714286)),
+                            labelStyle: const TextStyle(fontSize: 14),
                             border: GradientOutlineInputBorder(
                               gradient: const LinearGradient(
                                 colors: [
@@ -252,8 +292,7 @@ class _SignupState extends State<Signup> {
                                   Color(0xffFC6590),
                                 ],
                               ),
-                              borderRadius: BorderRadius.circular(
-                                  ((screenheight + screenwidth) / 53.6)),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             labelText: 'Last Name',
                             errorStyle: const TextStyle(fontSize: 0.0),
@@ -267,20 +306,16 @@ class _SignupState extends State<Signup> {
                                             padding: EdgeInsets.all(
                                                 (screenheight / 67)),
                                             height: screenheight * 0.1264044944,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFFC72C41),
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                      ((screenheight +
-                                                              screenwidth) /
-                                                          53.6))),
+                                                  Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Last name should not be less than 3 characters',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: (screenheight *
-                                                    0.01679104478),
+                                                fontSize: 18,
                                               ),
                                             ),
                                           ),
@@ -302,8 +337,7 @@ class _SignupState extends State<Signup> {
                             }
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          style:
-                              TextStyle(fontSize: (screenheight * 0.020522388)),
+                          style: const TextStyle(fontSize: 22),
                         ),
                       ),
                     ],
@@ -327,8 +361,8 @@ class _SignupState extends State<Signup> {
                         LengthLimitingTextInputFormatter(11),
                       ],
                       decoration: InputDecoration(
-                        labelStyle: TextStyle(
-                          fontSize: (screenheight / 50.85714286),
+                        labelStyle: const TextStyle(
+                          fontSize: 14,
                         ),
                         border: GradientOutlineInputBorder(
                           gradient: const LinearGradient(
@@ -338,8 +372,7 @@ class _SignupState extends State<Signup> {
                               Color(0xffFC6590),
                             ],
                           ),
-                          borderRadius: BorderRadius.circular(
-                              ((screenheight + screenwidth) / 53.6)),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         labelText: 'Phone Number',
                         errorStyle: const TextStyle(fontSize: 0.0),
@@ -352,19 +385,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Phone number should not be less than 11 numbers',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -386,7 +416,7 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: TextStyle(fontSize: (screenheight * 0.020522388)),
+                      style: const TextStyle(fontSize: 22),
                     ),
                   ),
                   SizedBox(height: screenheight / 44.5),
@@ -403,8 +433,8 @@ class _SignupState extends State<Signup> {
                       textAlign: TextAlign.center,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelStyle: TextStyle(
-                          fontSize: (screenheight / 50.85714286),
+                        labelStyle: const TextStyle(
+                          fontSize: 14,
                         ),
                         border: GradientOutlineInputBorder(
                           gradient: const LinearGradient(
@@ -414,8 +444,7 @@ class _SignupState extends State<Signup> {
                               Color(0xffFC6590),
                             ],
                           ),
-                          borderRadius: BorderRadius.circular(
-                              ((screenheight + screenwidth) / 53.6)),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         labelText: 'Email',
                         errorStyle: const TextStyle(fontSize: 0.0),
@@ -428,19 +457,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Email is required',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -462,20 +488,16 @@ class _SignupState extends State<Signup> {
                                             padding: EdgeInsets.all(
                                                 (screenheight / 67)),
                                             height: screenheight * 0.1264044944,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFFC72C41),
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFFC72C41),
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                      ((screenheight +
-                                                              screenwidth) /
-                                                          53.6))),
+                                                  Radius.circular(20)),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'Invalid email format',
                                               style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: (screenheight *
-                                                    0.01679104478),
+                                                fontSize: 18,
                                               ),
                                             ),
                                           ),
@@ -499,7 +521,7 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: TextStyle(fontSize: (screenheight * 0.020522388)),
+                      style: const TextStyle(fontSize: 22),
                     ),
                   ),
                   SizedBox(height: screenheight / 44.5),
@@ -529,19 +551,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password should not be less than 8 characters',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -562,19 +581,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one uppercase letter',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -595,19 +611,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one lowercase letter',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -628,19 +641,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one digit',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -661,19 +671,16 @@ class _SignupState extends State<Signup> {
                                         padding:
                                             EdgeInsets.all((screenheight / 67)),
                                         height: screenheight * 0.1264044944,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFC72C41),
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFC72C41),
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(((screenheight +
-                                                      screenwidth) /
-                                                  53.6))),
+                                              Radius.circular(20)),
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Password must contain at least one special character',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize:
-                                                (screenheight * 0.01679104478),
+                                            fontSize: 18,
                                           ),
                                         ),
                                       ),
@@ -699,8 +706,8 @@ class _SignupState extends State<Signup> {
                             ),
                           ],
                         ),
-                        labelStyle: TextStyle(
-                          fontSize: (screenheight / 50.85714286),
+                        labelStyle: const TextStyle(
+                          fontSize: 14,
                         ),
                         border: GradientOutlineInputBorder(
                           gradient: const LinearGradient(
@@ -710,8 +717,7 @@ class _SignupState extends State<Signup> {
                               Color(0xffFC6590),
                             ],
                           ),
-                          borderRadius: BorderRadius.circular(
-                              ((screenheight + screenwidth) / 53.6)),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         labelText: 'Password',
                       ),
@@ -727,7 +733,7 @@ class _SignupState extends State<Signup> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      style: TextStyle(fontSize: (screenheight * 0.020522388)),
+                      style: const TextStyle(fontSize: 22),
                     ),
                   ),
                   SizedBox(height: screenheight / 20.34285714),
@@ -738,27 +744,30 @@ class _SignupState extends State<Signup> {
                         onPressed: () async {
                           if (_formkey.currentState!.validate()) {
                             isLoading(true);
-                            myauth.setConfig(
-                                appEmail: "noreply@micro.com",
-                                appName: "Micro",
-                                userEmail: email.text,
-                                otpLength: 6,
-                                otpType: OTPType.digitsOnly);
+                            Future<bool> check = signUp();
+                            if (await check) {
+                              myauth.setConfig(
+                                  appEmail: "noreply@micro.com",
+                                  appName: "Micro",
+                                  userEmail: email.text,
+                                  otpLength: 6,
+                                  otpType: OTPType.digitsOnly);
 
-                            if (await myauth.sendOTP() == true) {
-                              isLoading(false);
-                              Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => verifyEmailV2(
-                                          firstName: firstName.text,
-                                          secondName: secondName.text,
-                                          phone: phone.text,
-                                          email: email.text,
-                                          password: password.text,
-                                          myauth: myauth,
-                                        )),
-                              );
+                              if (await myauth.sendOTP() == true) {
+                                isLoading(false);
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) => verifyEmailV2(
+                                            firstName: firstName.text,
+                                            secondName: secondName.text,
+                                            phone: phone.text,
+                                            email: email.text,
+                                            password: password.text,
+                                            myauth: myauth,
+                                          )),
+                                );
+                              }
                             }
                           }
                         },
@@ -767,9 +776,9 @@ class _SignupState extends State<Signup> {
                               Size(screenwidth / 2, screenheight / 12.71428571),
                           backgroundColor: const Color(0xff6958D6),
                           elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  ((screenheight + screenwidth) / 53.6)))),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
                         ),
                         child: Text(
                           'Create Account',

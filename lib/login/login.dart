@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:micro/gradient.dart';
 import 'package:gradient_borders/gradient_borders.dart';
@@ -10,6 +12,7 @@ final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
 class Login extends StatefulWidget {
   const Login({Key? Key}) : super(key: Key);
+
   static const routeName = '/login';
 
   @override
@@ -26,6 +29,75 @@ class _LoginState extends State<Login> {
     super.initState();
 
     _isObsecured = true;
+  }
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void isLoading(bool isloading) {
+    isloading
+        ? showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Color(0xff7762FF),
+                backgroundColor: Colors.grey,
+              ));
+            })
+        : Navigator.of(context).pop();
+  }
+
+  Future<void> saveUserId(String userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', userId);
+  }
+
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: _emailController.text)
+          .where('password', isEqualTo: _passwordController.text)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        String userId = querySnapshot.docs.first.id;
+        await saveUserId(userId);
+        await saveUserSignUpState();
+        isLoading(false);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => homePage(
+                    userId: userId,
+                  )),
+        );
+      } else {
+        isLoading(false);
+        _showErrorDialog('Email or password are invalid');
+      }
+    } catch (e) {
+      isLoading(false);
+      _showErrorDialog('Something went wrong');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Login failed'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -60,7 +132,7 @@ class _LoginState extends State<Login> {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) => Signup()),
+                                  builder: (context) => const Signup()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -119,6 +191,7 @@ class _LoginState extends State<Login> {
                           height: 64,
                           width: 310,
                           child: TextFormField(
+                            controller: _emailController,
                             onChanged: (value) {
                               setState(() {
                                 _email = value;
@@ -227,6 +300,7 @@ class _LoginState extends State<Login> {
                           height: 64,
                           width: 310,
                           child: TextFormField(
+                            controller: _passwordController,
                             key: const ValueKey('login_password'),
                             onChanged: (value) {
                               setState(() {
@@ -342,11 +416,13 @@ class _LoginState extends State<Login> {
                         ElevatedButton(
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) => homePage()),
-                              );
+                              isLoading(true);
+                              _signInWithEmailAndPassword();
+                              // Navigator.push(
+                              //   context,
+                              //   CupertinoPageRoute(
+                              //       builder: (context) => homePage()),
+                              // );
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -375,5 +451,10 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  Future<void> saveUserSignUpState() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isSignedUp', true);
   }
 }
